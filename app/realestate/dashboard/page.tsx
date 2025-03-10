@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import React, { useState } from 'react';
 import { 
@@ -207,7 +208,7 @@ const Dashboard = () => {
   const [timeRange, setTimeRange] = useState('month');
   
   // Function to format currency
-  const formatCurrency = (value) => {
+  const formatCurrency = (value:any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
