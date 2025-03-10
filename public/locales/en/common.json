@@ -1,0 +1,214 @@
+{
+    "navigation": {
+        "features": "Features",
+        "process": "Process",
+        "pricing": "Pricing",
+        "login": "Login",
+        "start": "Start"
+    },
+    "hero": {
+        "title": "Next-Gen AI Calling Technology",
+        "subtitle": "Seamless conversations. Perfect scaling. Infinite possibilities.",
+        "getStarted": "Get Started",
+        "watchDemo": "Watch Demo",
+        "trial": "No credit card required • 14-day free trial"
+    },
+    "features": {
+        "coreTitle": "Core Features",
+        "description": "Minimalistic design. Maximum impact.",
+        "list": [
+            {
+                "title": "Hyper-Realistic Voice",
+                "description": "Indistinguishable from human conversation."
+            },
+            {
+                "title": "Context Awareness",
+                "description": "Adapts in real-time to any conversation flow."
+            },
+            {
+                "title": "Enterprise Security",
+                "description": "End-to-end encryption and compliance."
+            },
+            {
+                "title": "Infinite Scaling",
+                "description": "Thousands of concurrent calls without quality loss."
+            },
+            {
+                "title": "CRM Integration",
+                "description": "Seamless connection with your existing stack."
+            },
+            {
+                "title": "Advanced Analytics",
+                "description": "Deep insights into every interaction."
+            }
+        ]
+    },
+    "process": {
+        "title": "Process",
+        "description": "Simple setup. Powerful results.",
+        "steps": [
+            {
+                "title": "Configure",
+                "description": "Set objectives and personalize your AI voice."
+            },
+            {
+                "title": "Deploy",
+                "description": "Launch your campaign with one click."
+            },
+            {
+                "title": "Analyze",
+                "description": "Optimize performance with real-time data."
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Pricing",
+        "description": "Transparent. Flexible. No hidden fees.",
+        "plans": {
+            "basic": {
+                "name": "Basic",
+                "price": "$99",
+                "period": "/mo",
+                "description": "For small teams",
+                "features": [
+                    "500 AI call minutes",
+                    "3 voice profiles",
+                    "Basic analytics",
+                    "Email support"
+                ],
+                "cta": "Start"
+            },
+            "pro": {
+                "name": "Pro",
+                "price": "$299",
+                "period": "/mo",
+                "description": "For growing businesses",
+                "features": [
+                    "2,000 AI call minutes",
+                    "10 voice profiles",
+                    "Advanced analytics",
+                    "Priority support",
+                    "All integrations"
+                ],
+                "cta": "Start",
+                "highlighted": true
+            },
+            "enterprise": {
+                "name": "Enterprise",
+                "price": "Custom",
+                "period": "",
+                "description": "For large operations",
+                "features": [
+                    "Unlimited minutes",
+                    "Unlimited profiles",
+                    "Real-time dashboard",
+                    "Dedicated manager",
+                    "Custom development",
+                    "SLA guarantees"
+                ],
+                "cta": "Contact"
+            }
+        }
+    },
+    "cta": {
+        "title": "Experience the Future of AI Calling",
+        "subTitle": "Start your free trial today. No credit card required.",
+        "button": "Get Started"
+    },
+    "footer": {
+        "privacy": "Privacy",
+        "terms": "Terms",
+        "about": "About",
+        "blog": "Blog",
+        "contact": "Contact",
+        "rights": "© 2025 AI Nexus. All rights reserved."
+    },
+    "signup": {
+        "title": "Create your account",
+        "subtitle": "Start your 14-day free trial, no credit card required",
+        "googleButton": "Sign up with Google",
+        "orContinueWith": "or continue with",
+        "fullName": "Full Name",
+        "namePlaceholder": "Enter your name",
+        "emailAddress": "Email Address",
+        "emailPlaceholder": "you@example.com",
+        "password": "Password",
+        "passwordPlaceholder": "Create a password",
+        "passwordNote": "Must be at least 8 characters",
+        "createAccountButton": "Create Account",
+        "agreeText": "By signing up, you agree to our",
+        "terms": "Terms of Service",
+        "andText": "and",
+        "privacyPolicy": "Privacy Policy",
+        "alreadyAccount": "Already have an account?",
+        "login": "Log in",
+        "backToHome": "Back to home"
+    },
+    "login": {
+        "title": "Welcome back",
+        "subtitle": "Log in to access your account",
+        "googleButton": "Log in with Google",
+        "orContinueWith": "or continue with",
+        "emailAddress": "Email Address",
+        "emailPlaceholder": "you@example.com",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "forgotPassword": "Forgot password?",
+        "rememberMe": "Remember me",
+        "loginButton": "Log In",
+        "noAccount": "Don't have an account?",
+        "signup": "Sign up",
+        "backToHome": "Back to home"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard Home",
+        "clients": "Clients",
+        "leads": "Leads",
+        "language": "Language"
+      },
+      "dashboard": {
+        "title": "Dashboard",
+        "adminUser": "Admin User",
+        "myAccount": "My Account",
+        "profile": "Profile",
+        "messages": "Messages",
+        "logout": "Log out",
+        "totalClients": "Total Clients",
+        "activeLeads": "Active Leads",
+        "conversionRate": "Conversion Rate",
+        "totalEngagements": "Total Engagements",
+        "chartSectionTitle": "Growth Analytics",
+        "chartTitle": "Clients and Leads Growth Over Time",
+        "chartClients": "Clients",
+        "chartLeads": "Leads",
+        "last30Days": "Last 30 days",
+        "lastQuarter": "Last quarter",
+        "lastYear": "Last year",
+        "exportData": "Export data",
+        "businessInfoTitle": "Business Information",
+        "businessInfoDescription": "Update your business details and chatbot configuration",
+        "businessNameLabel": "Business Name",
+        "businessNamePlaceholder": "Enter your business name",
+        "chatbotInfoLabel": "Chatbot Information",
+        "chatbotInfoPlaceholder": "Enter information for your chatbot",
+        "chatbotInfoDescription": "This information will be used to personalize your chatbot's responses.",
+        "saveButton": "Save Information",
+        "resetButton": "Reset",
+        "previewTitle": "Quick Preview",
+        "clientsPreviewTitle": "Clients",
+        "leadsPreviewTitle": "Leads",
+        "addNew": "Add New",
+        "viewAllClients": "View All Clients",
+        "viewAllLeads": "View All Leads",
+        "recentActivityTitle": "Recent Activity",
+        "recentActivityDescription": "Latest client and lead interactions",
+        "requestedCallback": "requested a callback",
+        "callbackTime": "10 minutes ago",
+        "callCompletedWith": "Call completed with",
+        "callCompletedTime": "45 minutes ago",
+        "newLeadCreated": "New lead created:",
+        "newLeadTime": "2 hours ago",
+        "emailSentTo": "Email sent to",
+        "emailSentTime": "3 hours ago"
+      }
+}
