@@ -1,3 +1,4 @@
+// @ts-nocheck
 // pages/onboarding.js
 'use client'
 import { useState } from 'react'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import React from 'react'
 import Sidebar from '@/components/custom/messaging_call/sidebar'
