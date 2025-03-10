@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use client'
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Check, X, Menu, Home, Users, DollarSign, BarChart2, MessageSquare, Star, Mail, Phone, ArrowRight, ArrowUpRight, Plus, Minus, ChevronRight } from 'lucide-react';

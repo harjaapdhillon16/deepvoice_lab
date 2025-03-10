@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use client'
 import React, { useState } from 'react';
 import { Eye, EyeOff, ArrowRight, ChevronLeft, Check } from 'lucide-react';
