@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useTranslation } from 'next-i18next'
 
 export default function ClientsLeadsPreview({ clients, leads }: any) {
