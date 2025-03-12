@@ -485,7 +485,7 @@ const agents = [
     { id: 5, name: "David Thompson", email: "david@propertypro.com", phone: "(619) 555-6789" }
 ];
 
-const getInitials = (name)=>{
+const getInitials = (name) => {
     return name[0];
 }
 
@@ -509,6 +509,21 @@ const formatCurrency = (amount) => {
         maximumFractionDigits: 0
     }).format(amount);
 };
+
+const QuickStatusUpdate = ({ leadId, currentStatus, onStatusChange }) => (
+  <Select onValueChange={(value) => onStatusChange(leadId, value)} value={currentStatus}>
+      <SelectTrigger>
+          <SelectValue placeholder="Update Status" />
+      </SelectTrigger>
+      <SelectContent>
+          {leadStatuses.map((status) => (
+              <SelectItem key={status.value} value={status.value}>
+                  {status.label}
+              </SelectItem>
+          ))}
+      </SelectContent>
+  </Select>
+);
 
 const LeadsPage = () => {
     // State for leads management
@@ -787,8 +802,6 @@ const LeadsPage = () => {
         );
     };
 
-    
-
     const resetFilters = () => {
         setSearchQuery('');
         setStatusFilter([]);
@@ -840,7 +853,6 @@ const LeadsPage = () => {
         });
         setLeads(updatedLeads);
     };
-
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -1160,745 +1172,745 @@ const LeadsPage = () => {
 
             {/* Lead Details Side Panel */}
             <Sheet open={detailsOpen} onOpenChange={setDetailsOpen} side="right">
-  <SheetContent className="w-full sm:max-w-xl p-0 overflow-hidden">
-    {selectedLead && (
-      <div className="flex flex-col h-full">
-        {/* Header with background gradient and photo */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 to-violet-600/90 z-0"></div>
-          <div className="h-32 bg-[url('/api/placeholder/600/400')] bg-center bg-cover opacity-30"></div>
-          
-          <div className="absolute top-0 left-0 w-full h-full p-6 flex items-start justify-between z-10">
-            <div className="flex items-center">
-              <Avatar className="h-14 w-14 border-2 border-white shadow-md">
-                <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-lg">
-                  {selectedLead.name.slice(0,1)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="ml-4">
-                <h2 className="text-xl font-bold text-white">{selectedLead.name}</h2>
-                <div className="flex items-center space-x-2 mt-1">
-                  <Badge className="bg-white/20 text-white hover:bg-white/30">
-                    {selectedLead.type}
-                  </Badge>
-                  <Badge 
-                    variant={getStatusBadgeVariant(selectedLead.status)}
-                    className="shadow-sm"
-                  >
-                    {selectedLead.status}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-            
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => openUpdateForm(selectedLead)}>
-                  <Edit2 className="h-4 w-4 mr-2" />
-                  Edit Lead
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                  onClick={() => setDeleteDialogOpen(true)}
-                  className="text-red-600"
-                >
-                  <Trash className="h-4 w-4 mr-2" />
-                  Delete Lead
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-
-        {/* Main content area with tabs */}
-        <Tabs defaultValue="overview" className="flex-1 overflow-hidden">
-          <div className="px-4 border-b">
-            <TabsList className="w-full justify-start space-x-4 p-0 bg-transparent h-12">
-              <TabsTrigger 
-                value="overview" 
-                className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 data-[state=active]:shadow-none px-1 py-3"
-              >
-                Overview
-              </TabsTrigger>
-              <TabsTrigger 
-                value="details" 
-                className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 data-[state=active]:shadow-none px-1 py-3"
-              >
-                {selectedLead.type === 'Buyer' ? 'Buyer Details' : 'Property Details'}
-              </TabsTrigger>
-              <TabsTrigger 
-                value="activity" 
-                className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 data-[state=active]:shadow-none px-1 py-3"
-              >
-                Activity
-              </TabsTrigger>
-            </TabsList>
-          </div>
-
-          <ScrollArea className="flex-1 h-[calc(100vh-13rem)]">
-            {/* Overview Tab */}
-            <TabsContent value="overview" className="p-6 pb-20 mt-0 space-y-6 h-full">
-              {/* Lead Score Card */}
-              <Card>
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium text-sm text-slate-600">Lead Quality Score</h3>
-                    <HoverCard>
-                      <HoverCardTrigger asChild>
-                        <div className="flex items-center cursor-help">
-                          <span className={`text-lg font-bold ${
-                            selectedLead.score >= 80 ? 'text-emerald-600' : 
-                            selectedLead.score >= 60 ? 'text-amber-600' : 
-                            'text-red-600'
-                          }`}>
-                            {selectedLead.score}
-                          </span>
-                          <span className="text-xs text-slate-400 ml-1">/100</span>
-                        </div>
-                      </HoverCardTrigger>
-                      <HoverCardContent className="w-80">
-                        <div className="space-y-2">
-                          <h4 className="font-medium">Score Breakdown</h4>
-                          <div className="space-y-1 text-sm">
-                            <div className="flex justify-between">
-                              <span>Engagement:</span>
-                              <span className="font-medium">{Math.round(selectedLead.score * 0.4)}/40</span>
+                <SheetContent className="w-full sm:max-w-xl p-0 overflow-hidden">
+                    {selectedLead && (
+                        <div className="flex flex-col h-full">
+                            {/* Header with background gradient and photo */}
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 to-violet-600/90 z-0"></div>
+                                <div className="h-32 bg-[url('/api/placeholder/600/400')] bg-center bg-cover opacity-30"></div>
+                                
+                                <div className="absolute top-0 left-0 w-full h-full p-6 flex items-start justify-between z-10">
+                                    <div className="flex items-center">
+                                        <Avatar className="h-14 w-14 border-2 border-white shadow-md">
+                                            <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-lg">
+                                                {selectedLead.name.slice(0,1)}
+                                            </AvatarFallback>
+                                        </Avatar>
+                                        <div className="ml-4">
+                                            <h2 className="text-xl font-bold text-white">{selectedLead.name}</h2>
+                                            <div className="flex items-center space-x-2 mt-1">
+                                                <Badge className="bg-white/20 text-white hover:bg-white/30">
+                                                    {selectedLead.type}
+                                                </Badge>
+                                                <Badge 
+                                                    variant={getStatusBadgeVariant(selectedLead.status)}
+                                                    className="shadow-sm"
+                                                >
+                                                    {selectedLead.status}
+                                                </Badge>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
+                                                <MoreHorizontal className="h-4 w-4" />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuItem onClick={() => openUpdateForm(selectedLead)}>
+                                                <Edit2 className="h-4 w-4 mr-2" />
+                                                Edit Lead
+                                            </DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem 
+                                                onClick={() => setDeleteDialogOpen(true)}
+                                                className="text-red-600"
+                                            >
+                                                <Trash className="h-4 w-4 mr-2" />
+                                                Delete Lead
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </div>
                             </div>
-                            <div className="flex justify-between">
-                              <span>Profile Completeness:</span>
-                              <span className="font-medium">{Math.round(selectedLead.score * 0.3)}/30</span>
+
+                            {/* Main content area with tabs */}
+                            <Tabs defaultValue="overview" className="flex-1 overflow-hidden">
+                                <div className="px-4 border-b">
+                                    <TabsList className="w-full justify-start space-x-4 p-0 bg-transparent h-12">
+                                        <TabsTrigger 
+                                            value="overview" 
+                                            className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 data-[state=active]:shadow-none px-1 py-3"
+                                        >
+                                            Overview
+                                        </TabsTrigger>
+                                        <TabsTrigger 
+                                            value="details" 
+                                            className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 data-[state=active]:shadow-none px-1 py-3"
+                                        >
+                                            {selectedLead.type === 'Buyer' ? 'Buyer Details' : 'Property Details'}
+                                        </TabsTrigger>
+                                        <TabsTrigger 
+                                            value="activity" 
+                                            className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 data-[state=active]:shadow-none px-1 py-3"
+                                        >
+                                            Activity
+                                        </TabsTrigger>
+                                    </TabsList>
+                                </div>
+
+                                <ScrollArea className="flex-1 h-[calc(100vh-13rem)]">
+                                    {/* Overview Tab */}
+                                    <TabsContent value="overview" className="p-6 pb-20 mt-0 space-y-6 h-full">
+                                        {/* Lead Score Card */}
+                                        <Card>
+                                            <CardContent className="p-4">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <h3 className="font-medium text-sm text-slate-600">Lead Quality Score</h3>
+                                                    <HoverCard>
+                                                        <HoverCardTrigger asChild>
+                                                            <div className="flex items-center cursor-help">
+                                                                <span className={`text-lg font-bold ${
+                                                                    selectedLead.score >= 80 ? 'text-emerald-600' : 
+                                                                    selectedLead.score >= 60 ? 'text-amber-600' : 
+                                                                    'text-red-600'
+                                                                }`}>
+                                                                    {selectedLead.score}
+                                                                </span>
+                                                                <span className="text-xs text-slate-400 ml-1">/100</span>
+                                                            </div>
+                                                        </HoverCardTrigger>
+                                                        <HoverCardContent className="w-80">
+                                                            <div className="space-y-2">
+                                                                <h4 className="font-medium">Score Breakdown</h4>
+                                                                <div className="space-y-1 text-sm">
+                                                                    <div className="flex justify-between">
+                                                                        <span>Engagement:</span>
+                                                                        <span className="font-medium">{Math.round(selectedLead.score * 0.4)}/40</span>
+                                                                    </div>
+                                                                    <div className="flex justify-between">
+                                                                        <span>Profile Completeness:</span>
+                                                                        <span className="font-medium">{Math.round(selectedLead.score * 0.3)}/30</span>
+                                                                    </div>
+                                                                    <div className="flex justify-between">
+                                                                        <span>Fit:</span>
+                                                                        <span className="font-medium">{Math.round(selectedLead.score * 0.3)}/30</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </HoverCardContent>
+                                                    </HoverCard>
+                                                </div>
+                                                
+                                                <div className="space-y-2">
+                                                    <Progress 
+                                                        value={selectedLead.score} 
+                                                        className="h-2"
+                                                        indicatorClassName={`${
+                                                            selectedLead.score >= 80 ? 'bg-emerald-600' : 
+                                                            selectedLead.score >= 60 ? 'bg-amber-600' : 
+                                                            'bg-red-600'
+                                                        }`}
+                                                    />
+                                                    <div className="flex justify-between text-xs text-slate-500">
+                                                        <span>Cold</span>
+                                                        <span>Warm</span>
+                                                        <span>Hot</span>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+
+                                        {/* Contact Information & Key Details */}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {/* Contact Info */}
+                                            <Card>
+                                                <CardHeader className="p-4 pb-2">
+                                                    <CardTitle className="text-sm font-medium text-slate-600">
+                                                        <div className="flex items-center">
+                                                            <Phone className="h-4 w-4 mr-2 text-indigo-500" />
+                                                            Contact Information
+                                                        </div>
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent className="p-4 pt-0 space-y-3">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center text-sm">
+                                                            <Mail className="h-4 w-4 mr-2 text-slate-400" />
+                                                            <span className="text-slate-600">Email</span>
+                                                        </div>
+                                                        <a href={`mailto:${selectedLead.email}`} className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                                                            {selectedLead.email}
+                                                        </a>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center text-sm">
+                                                            <Phone className="h-4 w-4 mr-2 text-slate-400" />
+                                                            <span className="text-slate-600">Phone</span>
+                                                        </div>
+                                                        <a href={`tel:${selectedLead.phone}`} className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                                                            {selectedLead.phone}
+                                                        </a>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-between pt-2">
+                                                        <Button variant="outline" size="sm" className="w-[48%]" asChild>
+                                                            <a href={`mailto:${selectedLead.email}`}>
+                                                                <Mail className="h-4 w-4 mr-2" />
+                                                                Email
+                                                            </a>
+                                                        </Button>
+                                                        <Button variant="outline" size="sm" className="w-[48%]" asChild>
+                                                            <a href={`tel:${selectedLead.phone}`}>
+                                                                <Phone className="h-4 w-4 mr-2" />
+                                                                Call
+                                                            </a>
+                                                        </Button>
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+
+                                            {/* Lead Details */}
+                                            <Card>
+                                                <CardHeader className="p-4 pb-2">
+                                                    <CardTitle className="text-sm font-medium text-slate-600">
+                                                        <div className="flex items-center">
+                                                            <User className="h-4 w-4 mr-2 text-indigo-500" />
+                                                            Lead Details
+                                                        </div>
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent className="p-4 pt-0 space-y-3">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center text-sm">
+                                                            <Globe className="h-4 w-4 mr-2 text-slate-400" />
+                                                            <span className="text-slate-600">Source</span>
+                                                        </div>
+                                                        <div className="flex items-center">
+                                                            {getSourceIcon(selectedLead.source)}
+                                                            <span className="ml-1 text-sm font-medium">{selectedLead.source}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center text-sm">
+                                                            <Calendar className="h-4 w-4 mr-2 text-slate-400" />
+                                                            <span className="text-slate-600">Created</span>
+                                                        </div>
+                                                        <span className="text-sm font-medium">{formatDate(selectedLead.createdAt)}</span>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center text-sm">
+                                                            <User className="h-4 w-4 mr-2 text-slate-400" />
+                                                            <span className="text-slate-600">Agent</span>
+                                                        </div>
+                                                        <span className="text-sm font-medium">{selectedLead.assignedAgent.name}</span>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center text-sm">
+                                                            <Clock className="h-4 w-4 mr-2 text-slate-400" />
+                                                            <span className="text-slate-600">Last Contact</span>
+                                                        </div>
+                                                        <span className="text-sm font-medium">{formatDate(selectedLead.lastContact)}</span>
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+                                        </div>
+
+                                        {/* Notes Card */}
+                                        <Card>
+                                            <CardHeader className="p-4 pb-2">
+                                                <div className="flex items-center justify-between">
+                                                    <CardTitle className="text-sm font-medium text-slate-600">
+                                                        <div className="flex items-center">
+                                                            <FileText className="h-4 w-4 mr-2 text-indigo-500" />
+                                                            Notes
+                                                        </div>
+                                                    </CardTitle>
+                                                    <Popover>
+                                                        <PopoverTrigger asChild>
+                                                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-500">
+                                                                <Plus className="h-4 w-4" />
+                                                            </Button>
+                                                        </PopoverTrigger>
+                                                        <PopoverContent className="w-80">
+                                                            <div className="space-y-4">
+                                                                <h4 className="font-medium">Add a Note</h4>
+                                                                <Textarea 
+                                                                    placeholder="Enter your note here..."
+                                                                    className="min-h-20"
+                                                                    id="new-note"
+                                                                />
+                                                                <div className="flex justify-end">
+                                                                    <Button 
+                                                                        onClick={() => {
+                                                                            const noteElement = document.getElementById('new-note');
+                                                                            if (noteElement) {
+                                                                                addNote(selectedLead.id, noteElement.value);
+                                                                                noteElement.value = '';
+                                                                            }
+                                                                        }}
+                                                                        size="sm"
+                                                                    >
+                                                                        Save Note
+                                                                    </Button>
+                                                                </div>
+                                                            </div>
+                                                        </PopoverContent>
+                                                    </Popover>
+                                                </div>
+                                            </CardHeader>
+                                            <CardContent className="p-4 pt-1">
+                                                <div className="p-3 bg-slate-50 rounded-md text-sm min-h-20">
+                                                    {selectedLead.notes || "No notes available."}
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+
+                                        {/* Quick Actions */}
+                                        <div>
+                                            <h3 className="text-sm font-medium text-slate-600 mb-3">Quick Actions</h3>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <QuickStatusUpdate 
+                                                    leadId={selectedLead.id} 
+                                                    currentStatus={selectedLead.status} 
+                                                    onStatusChange={updateLeadStatus} 
+                                                />
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <Button variant="outline" className="w-full">
+                                                            <MessageSquare className="mr-2 h-4 w-4" />
+                                                            Add Note
+                                                        </Button>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-80">
+                                                        <div className="space-y-4">
+                                                            <h4 className="font-medium">Add a Note</h4>
+                                                            <Textarea 
+                                                                placeholder="Enter your note here..."
+                                                                className="min-h-20"
+                                                                id="new-note"
+                                                            />
+                                                            <div className="flex justify-end">
+                                                                <Button 
+                                                                    onClick={() => {
+                                                                        const noteElement = document.getElementById('new-note');
+                                                                        if (noteElement) {
+                                                                            addNote(selectedLead.id, noteElement.value);
+                                                                            noteElement.value = '';
+                                                                        }
+                                                                    }}
+                                                                    size="sm"
+                                                                >
+                                                                    Save Note
+                                                                </Button>
+                                                            </div>
+                                                        </div>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <Button variant="outline" className="w-full" asChild>
+                                                    <a href={`mailto:${selectedLead.email}`}>
+                                                        <Mail className="mr-2 h-4 w-4" />
+                                                        Send Email
+                                                    </a>
+                                                </Button>
+                                                <Button variant="outline" className="w-full" asChild>
+                                                    <a href={`tel:${selectedLead.phone}`}>
+                                                        <Phone className="mr-2 h-4 w-4" />
+                                                        Call Lead
+                                                    </a>
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </TabsContent>
+
+                                    {/* Details Tab */}
+                                    <TabsContent value="details" className="p-6 pb-20 mt-0 space-y-6">
+                                        {/* Buyer-specific information */}
+                                        {selectedLead.type === 'Buyer' && (
+                                            <>
+                                                <div className="flex justify-between items-center">
+                                                    <h3 className="text-lg font-semibold text-slate-900">Buyer Requirements</h3>
+                                                    <Badge variant="outline" className="bg-indigo-50">
+                                                        {selectedLead.timeline || "No timeline"}
+                                                    </Badge>
+                                                </div>
+
+                                                {/* Budget Range */}
+                                                <Card>
+                                                    <CardHeader className="p-4 pb-2">
+                                                        <CardTitle className="text-sm font-medium text-slate-600">
+                                                            <div className="flex items-center">
+                                                                <DollarSign className="h-4 w-4 mr-2 text-emerald-500" />
+                                                                Budget Range
+                                                            </div>
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent className="p-4 pt-1">
+                                                        <div className="flex items-center justify-center space-x-4">
+                                                            <div className="text-center py-3 px-6 bg-slate-50 rounded-lg flex-1">
+                                                                <p className="text-sm text-slate-500">Minimum</p>
+                                                                <p className="text-xl font-bold text-slate-900 mt-1">
+                                                                    {selectedLead.preferences?.budget?.min ? formatCurrency(selectedLead.preferences.budget.min) : "N/A"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="text-center py-3 px-6 bg-slate-50 rounded-lg flex-1">
+                                                                <p className="text-sm text-slate-500">Maximum</p>
+                                                                <p className="text-xl font-bold text-slate-900 mt-1">
+                                                                    {selectedLead.preferences?.budget?.max ? formatCurrency(selectedLead.preferences.budget.max) : "N/A"}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {selectedLead.preApproved && (
+                                                            <div className="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+                                                                <div className="flex items-center">
+                                                                    <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                                                                    <span className="text-sm font-medium text-emerald-800">Pre-Approved for {formatCurrency(selectedLead.preApprovalAmount)}</span>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </CardContent>
+                                                </Card>
+
+                                                {/* Property Preferences */}
+                                                <Card>
+                                                    <CardHeader className="p-4 pb-2">
+                                                        <CardTitle className="text-sm font-medium text-slate-600">
+                                                            <div className="flex items-center">
+                                                                <Home className="h-4 w-4 mr-2 text-indigo-500" />
+                                                                Property Preferences
+                                                            </div>
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent className="p-4 pt-1 space-y-4">
+                                                        <div className="grid grid-cols-3 gap-4">
+                                                            <div className="text-center p-3 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Bedrooms</p>
+                                                                <p className="text-lg font-semibold text-slate-900 mt-1">
+                                                                    {selectedLead.preferences?.bedrooms || "Any"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="text-center p-3 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Bathrooms</p>
+                                                                <p className="text-lg font-semibold text-slate-900 mt-1">
+                                                                    {selectedLead.preferences?.bathrooms || "Any"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="text-center p-3 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Property Types</p>
+                                                                <p className="text-lg font-semibold text-slate-900 mt-1">
+                                                                    {selectedLead.preferences?.propertyTypes?.length || 0}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <p className="text-sm font-medium text-slate-600 mb-2">Property Types</p>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {selectedLead.preferences?.propertyTypes?.map((type, index) => (
+                                                                    <Badge key={index} variant="secondary" className="bg-indigo-50">
+                                                                        {type}
+                                                                    </Badge>
+                                                                )) || "Not specified"}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <p className="text-sm font-medium text-slate-600 mb-2">Preferred Locations</p>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {selectedLead.preferences?.locations?.map((location, index) => (
+                                                                    <Badge key={index} variant="secondary" className="bg-purple-50">
+                                                                        {location}
+                                                                    </Badge>
+                                                                )) || "Not specified"}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <p className="text-sm font-medium text-slate-600 mb-2">Desired Features</p>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {selectedLead.preferences?.features?.map((feature, index) => (
+                                                                    <Badge key={index} variant="outline">
+                                                                        {feature}
+                                                                    </Badge>
+                                                                )) || "Not specified"}
+                                                            </div>
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
+                                            </>
+                                        )}
+
+                                        {/* Seller-specific information */}
+                                        {selectedLead.type === 'Seller' && (
+                                            <>
+                                                <div className="flex justify-between items-center">
+                                                    <h3 className="text-lg font-semibold text-slate-900">Property Details</h3>
+                                                    <div className="flex items-center space-x-2">
+                                                        <Badge variant="outline" className="bg-indigo-50">
+                                                            {selectedLead.timeline || "No timeline"}
+                                                        </Badge>
+                                                        {selectedLead.motivation && (
+                                                            <Badge variant="outline" className="bg-purple-50">
+                                                                {selectedLead.motivation}
+                                                            </Badge>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                {/* Property Address & Value */}
+                                                <Card>
+                                                    <CardHeader className="p-4 pb-2">
+                                                        <CardTitle className="text-sm font-medium text-slate-600">
+                                                            <div className="flex items-center">
+                                                                <Building className="h-4 w-4 mr-2 text-indigo-500" />
+                                                                Property Information
+                                                            </div>
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent className="p-4 pt-1 space-y-4">
+                                                        <div className="bg-slate-50 p-3 rounded-lg">
+                                                            <p className="text-sm text-slate-500">Property Address</p>
+                                                            <p className="text-base font-medium text-slate-900 mt-1">
+                                                                {selectedLead.property?.address || "Not specified"}
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <div className="flex space-x-4">
+                                                            <div className="flex-1 text-center p-3 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Property Type</p>
+                                                                <p className="text-base font-semibold text-slate-900 mt-1">
+                                                                    {selectedLead.property?.type || "N/A"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="flex-1 text-center p-3 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Estimated Value</p>
+                                                                <p className="text-base font-semibold text-slate-900 mt-1">
+                                                                    {selectedLead.property?.estimatedValue ? formatCurrency(selectedLead.property.estimatedValue) : "N/A"}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div className="grid grid-cols-4 gap-3">
+                                                            <div className="text-center p-2 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Beds</p>
+                                                                <p className="text-base font-semibold text-slate-900">
+                                                                    {selectedLead.property?.bedrooms || "N/A"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="text-center p-2 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Baths</p>
+                                                                <p className="text-base font-semibold text-slate-900">
+                                                                    {selectedLead.property?.bathrooms || "N/A"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="text-center p-2 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Sq. Ft.</p>
+                                                                <p className="text-base font-semibold text-slate-900">
+                                                                    {selectedLead.property?.area || "N/A"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="text-center p-2 bg-slate-50 rounded-lg">
+                                                                <p className="text-xs text-slate-500">Year</p>
+                                                                <p className="text-base font-semibold text-slate-900">
+                                                                    {selectedLead.property?.yearBuilt || "N/A"}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
+
+                                                {/* Property Features & Marketing Preferences */}
+                                                <Card>
+                                                    <CardHeader className="p-4 pb-2">
+                                                        <CardTitle className="text-sm font-medium text-slate-600">
+                                                            <div className="flex items-center">
+                                                                <Star className="h-4 w-4 mr-2 text-amber-500" />
+                                                                Features & Marketing
+                                                            </div>
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent className="p-4 pt-1 space-y-4">
+                                                        <div>
+                                                            <p className="text-sm font-medium text-slate-600 mb-2">Property Features</p>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {selectedLead.property?.features?.map((feature, index) => (
+                                                                    <Badge key={index} variant="outline">
+                                                                        {feature}
+                                                                    </Badge>
+                                                                )) || "None specified"}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <p className="text-sm font-medium text-slate-600 mb-2">Marketing Preferences</p>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {selectedLead.marketingPreferences?.map((pref, index) => (
+                                                                    <Badge key={index} variant="secondary" className="bg-purple-50">
+                                                                        {pref}
+                                                                    </Badge>
+                                                                )) || "None specified"}
+                                                            </div>
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
+                                            </>
+                                        )}
+                                    </TabsContent>
+
+                                    {/* Activity Tab */}
+                                    <TabsContent value="activity" className="p-6 pb-20 mt-0">
+                                        <div className="flex justify-between items-center mb-4">
+                                            <h3 className="text-lg font-semibold text-slate-900">Activity Timeline</h3>
+                                            <Popover>
+                                                <PopoverTrigger asChild>
+                                                    <Button variant="outline" size="sm">
+                                                        <Plus className="h-4 w-4 mr-2" />
+                                                        Add Activity
+                                                    </Button>
+                                                </PopoverTrigger>
+                                                <PopoverContent className="w-80">
+                                                    <div className="space-y-4">
+                                                        <h4 className="font-medium">Add New Activity</h4>
+                                                        <Select>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Select activity type" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="note">Note</SelectItem>
+                                                                <SelectItem value="email">Email</SelectItem>
+                                                                <SelectItem value="call">Call</SelectItem>
+                                                                <SelectItem value="meeting">Meeting</SelectItem>
+                                                                <SelectItem value="showing">Showing</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <Textarea 
+                                                            placeholder="Activity details..."
+                                                            className="min-h-20"
+                                                        />
+                                                        <div className="flex justify-end">
+                                                            <Button size="sm">
+                                                                Save Activity
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                </PopoverContent>
+                                            </Popover>
+                                        </div>
+                                        
+                                        {selectedLead.activities && selectedLead.activities.length > 0 ? (
+                                            <div className="space-y-4">
+                                                {selectedLead.activities.slice().reverse().map((activity) => (
+                                                    <Card key={activity.id} className="overflow-hidden">
+                                                        <div className="flex border-l-4 border-l-slate-300 hover:border-l-indigo-500 transition-colors">
+                                                            <div className="p-4 flex">
+                                                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 mr-3 flex-shrink-0">
+                                                                    {activity.type === 'Note' && <FileText className="h-5 w-5 text-slate-600" />}
+                                                                    {activity.type === 'Email' && <Mail className="h-5 w-5 text-blue-600" />}
+                                                                    {activity.type === 'Call' && <Phone className="h-5 w-5 text-green-600" />}
+                                                                    {activity.type === 'Meeting' && <Users className="h-5 w-5 text-purple-600" />}
+                                                                    {activity.type === 'Showing' && <Home className="h-5 w-5 text-amber-600" />}
+                                                                    {activity.type === 'Status Change' && <ArrowRight className="h-5 w-5 text-indigo-600" />}
+                                                                </div>
+                                                                <div className="flex-1 min-w-0">
+                                                                    <div className="flex items-center justify-between">
+                                                                        <h4 className="text-sm font-medium text-slate-900 truncate">{activity.type}</h4>
+                                                                        <time className="text-xs text-slate-500">{format(new Date(activity.date), 'MMM d, yyyy')}</time>
+                                                                    </div>
+                                                                    <p className="mt-1 text-sm text-slate-600">{activity.content}</p>
+                                                                    <div className="mt-2 flex items-center">
+                                                                        <div className="flex-shrink-0">
+                                                                            <Avatar className="h-6 w-6">
+                                                                                <AvatarFallback className="text-xs bg-slate-200">
+                                                                                    {getInitials(activity.user)}
+                                                                                </AvatarFallback>
+                                                                            </Avatar>
+                                                                        </div>
+                                                                        <div className="ml-2 flex items-center text-xs text-slate-500">
+                                                                            <p>{activity.user}</p>
+                                                                            <span className="mx-1">•</span>
+                                                                            <time>{format(new Date(activity.date), 'h:mm a')}</time>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Card>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <Card className="p-8 text-center">
+                                                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
+                                                    <Clock className="h-6 w-6 text-slate-600" />
+                                                </div>
+                                                <CardTitle className="mt-4">No activity recorded yet</CardTitle>
+                                                <CardDescription className="mt-2">
+                                                    Add your first activity to start tracking interactions with this lead.
+                                                </CardDescription>
+                                                <div className="mt-6">
+                                                    <Popover>
+                                                        <PopoverTrigger asChild>
+                                                            <Button>
+                                                                <Plus className="h-4 w-4 mr-2" />
+                                                                Add Activity
+                                                            </Button>
+                                                        </PopoverTrigger>
+                                                        <PopoverContent className="w-80">
+                                                            <div className="space-y-4">
+                                                                <h4 className="font-medium">Add New Activity</h4>
+                                                                <Select>
+                                                                    <SelectTrigger>
+                                                                        <SelectValue placeholder="Select activity type" />
+                                                                    </SelectTrigger>
+                                                                    <SelectContent>
+                                                                        <SelectItem value="note">Note</SelectItem>
+                                                                        <SelectItem value="email">Email</SelectItem>
+                                                                        <SelectItem value="call">Call</SelectItem>
+                                                                        <SelectItem value="meeting">Meeting</SelectItem>
+                                                                        <SelectItem value="showing">Showing</SelectItem>
+                                                                    </SelectContent>
+                                                                </Select>
+                                                                <Textarea 
+                                                                    placeholder="Activity details..."
+                                                                    className="min-h-20"
+                                                                />
+                                                                <div className="flex justify-end">
+                                                                    <Button size="sm">
+                                                                        Save Activity
+                                                                    </Button>
+                                                                </div>
+                                                            </div>
+                                                        </PopoverContent>
+                                                    </Popover>
+                                                </div>
+                                            </Card>
+                                        )}
+                                    </TabsContent>
+                                </ScrollArea>
+                            </Tabs>
+
+                            {/* Footer Actions */}
+                            <div className="p-4 border-t mt-auto">
+                                <div className="flex justify-between">
+                                    <Button 
+                                        variant="outline" 
+                                        onClick={() => setDetailsOpen(false)}
+                                    >
+                                        Close
+                                    </Button>
+                                    <div className="flex space-x-2">
+                                        <Button 
+                                            variant="outline"
+                                            className="border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100"
+                                            onClick={() => openUpdateForm(selectedLead)}
+                                        >
+                                            <Edit2 className="h-4 w-4 mr-2" />
+                                            Edit Lead
+                                        </Button>
+                                        <Button>
+                                            <Plus className="h-4 w-4 mr-2" />
+                                            Add Activity
+                                        </Button>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="flex justify-between">
-                              <span>Fit:</span>
-                              <span className="font-medium">{Math.round(selectedLead.score * 0.3)}/30</span>
-                            </div>
-                          </div>
                         </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Progress 
-                      value={selectedLead.score} 
-                      className="h-2"
-                      indicatorClassName={`${
-                        selectedLead.score >= 80 ? 'bg-emerald-600' : 
-                        selectedLead.score >= 60 ? 'bg-amber-600' : 
-                        'bg-red-600'
-                      }`}
-                    />
-                    <div className="flex justify-between text-xs text-slate-500">
-                      <span>Cold</span>
-                      <span>Warm</span>
-                      <span>Hot</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Contact Information & Key Details */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Contact Info */}
-                <Card>
-                  <CardHeader className="p-4 pb-2">
-                    <CardTitle className="text-sm font-medium text-slate-600">
-                      <div className="flex items-center">
-                        <Phone className="h-4 w-4 mr-2 text-indigo-500" />
-                        Contact Information
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm">
-                        <Mail className="h-4 w-4 mr-2 text-slate-400" />
-                        <span className="text-slate-600">Email</span>
-                      </div>
-                      <a href={`mailto:${selectedLead.email}`} className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
-                        {selectedLead.email}
-                      </a>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm">
-                        <Phone className="h-4 w-4 mr-2 text-slate-400" />
-                        <span className="text-slate-600">Phone</span>
-                      </div>
-                      <a href={`tel:${selectedLead.phone}`} className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
-                        {selectedLead.phone}
-                      </a>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-2">
-                      <Button variant="outline" size="sm" className="w-[48%]" asChild>
-                        <a href={`mailto:${selectedLead.email}`}>
-                          <Mail className="h-4 w-4 mr-2" />
-                          Email
-                        </a>
-                      </Button>
-                      <Button variant="outline" size="sm" className="w-[48%]" asChild>
-                        <a href={`tel:${selectedLead.phone}`}>
-                          <Phone className="h-4 w-4 mr-2" />
-                          Call
-                        </a>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Lead Details */}
-                <Card>
-                  <CardHeader className="p-4 pb-2">
-                    <CardTitle className="text-sm font-medium text-slate-600">
-                      <div className="flex items-center">
-                        <User className="h-4 w-4 mr-2 text-indigo-500" />
-                        Lead Details
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm">
-                        <Globe className="h-4 w-4 mr-2 text-slate-400" />
-                        <span className="text-slate-600">Source</span>
-                      </div>
-                      <div className="flex items-center">
-                        {getSourceIcon(selectedLead.source)}
-                        <span className="ml-1 text-sm font-medium">{selectedLead.source}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm">
-                        <Calendar className="h-4 w-4 mr-2 text-slate-400" />
-                        <span className="text-slate-600">Created</span>
-                      </div>
-                      <span className="text-sm font-medium">{formatDate(selectedLead.createdAt)}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm">
-                        <User className="h-4 w-4 mr-2 text-slate-400" />
-                        <span className="text-slate-600">Agent</span>
-                      </div>
-                      <span className="text-sm font-medium">{selectedLead.assignedAgent.name}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm">
-                        <Clock className="h-4 w-4 mr-2 text-slate-400" />
-                        <span className="text-slate-600">Last Contact</span>
-                      </div>
-                      <span className="text-sm font-medium">{formatDate(selectedLead.lastContact)}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Notes Card */}
-              <Card>
-                <CardHeader className="p-4 pb-2">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-medium text-slate-600">
-                      <div className="flex items-center">
-                        <FileText className="h-4 w-4 mr-2 text-indigo-500" />
-                        Notes
-                      </div>
-                    </CardTitle>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-500">
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80">
-                        <div className="space-y-4">
-                          <h4 className="font-medium">Add a Note</h4>
-                          <Textarea 
-                            placeholder="Enter your note here..."
-                            className="min-h-20"
-                            id="new-note"
-                          />
-                          <div className="flex justify-end">
-                            <Button 
-                              onClick={() => {
-                                const noteElement = document.getElementById('new-note');
-                                if (noteElement) {
-                                  addNote(selectedLead.id, noteElement.value);
-                                  noteElement.value = '';
-                                }
-                              }}
-                              size="sm"
-                            >
-                              Save Note
-                            </Button>
-                          </div>
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                </CardHeader>
-                <CardContent className="p-4 pt-1">
-                  <div className="p-3 bg-slate-50 rounded-md text-sm min-h-20">
-                    {selectedLead.notes || "No notes available."}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Quick Actions */}
-              <div>
-                <h3 className="text-sm font-medium text-slate-600 mb-3">Quick Actions</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <QuickStatusUpdate 
-                    leadId={selectedLead.id} 
-                    currentStatus={selectedLead.status} 
-                    onStatusChange={updateLeadStatus} 
-                  />
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" className="w-full">
-                        <MessageSquare className="mr-2 h-4 w-4" />
-                        Add Note
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-80">
-                      <div className="space-y-4">
-                        <h4 className="font-medium">Add a Note</h4>
-                        <Textarea 
-                          placeholder="Enter your note here..."
-                          className="min-h-20"
-                          id="new-note"
-                        />
-                        <div className="flex justify-end">
-                          <Button 
-                            onClick={() => {
-                              const noteElement = document.getElementById('new-note');
-                              if (noteElement) {
-                                addNote(selectedLead.id, noteElement.value);
-                                noteElement.value = '';
-                              }
-                            }}
-                            size="sm"
-                          >
-                            Save Note
-                          </Button>
-                        </div>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href={`mailto:${selectedLead.email}`}>
-                      <Mail className="mr-2 h-4 w-4" />
-                      Send Email
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href={`tel:${selectedLead.phone}`}>
-                      <Phone className="mr-2 h-4 w-4" />
-                      Call Lead
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </TabsContent>
-
-            {/* Details Tab */}
-            <TabsContent value="details" className="p-6 pb-20 mt-0 space-y-6">
-              {/* Buyer-specific information */}
-              {selectedLead.type === 'Buyer' && (
-                <>
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold text-slate-900">Buyer Requirements</h3>
-                    <Badge variant="outline" className="bg-indigo-50">
-                      {selectedLead.timeline || "No timeline"}
-                    </Badge>
-                  </div>
-
-                  {/* Budget Range */}
-                  <Card>
-                    <CardHeader className="p-4 pb-2">
-                      <CardTitle className="text-sm font-medium text-slate-600">
-                        <div className="flex items-center">
-                          <DollarSign className="h-4 w-4 mr-2 text-emerald-500" />
-                          Budget Range
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-1">
-                      <div className="flex items-center justify-center space-x-4">
-                        <div className="text-center py-3 px-6 bg-slate-50 rounded-lg flex-1">
-                          <p className="text-sm text-slate-500">Minimum</p>
-                          <p className="text-xl font-bold text-slate-900 mt-1">
-                            {selectedLead.preferences?.budget?.min ? formatCurrency(selectedLead.preferences.budget.min) : "N/A"}
-                          </p>
-                        </div>
-                        <div className="text-center py-3 px-6 bg-slate-50 rounded-lg flex-1">
-                          <p className="text-sm text-slate-500">Maximum</p>
-                          <p className="text-xl font-bold text-slate-900 mt-1">
-                            {selectedLead.preferences?.budget?.max ? formatCurrency(selectedLead.preferences.budget.max) : "N/A"}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      {selectedLead.preApproved && (
-                        <div className="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
-                          <div className="flex items-center">
-                            <Check className="h-4 w-4 text-emerald-500 mr-2" />
-                            <span className="text-sm font-medium text-emerald-800">Pre-Approved for {formatCurrency(selectedLead.preApprovalAmount)}</span>
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-
-                  {/* Property Preferences */}
-                  <Card>
-                    <CardHeader className="p-4 pb-2">
-                      <CardTitle className="text-sm font-medium text-slate-600">
-                        <div className="flex items-center">
-                          <Home className="h-4 w-4 mr-2 text-indigo-500" />
-                          Property Preferences
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-1 space-y-4">
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="text-center p-3 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Bedrooms</p>
-                          <p className="text-lg font-semibold text-slate-900 mt-1">
-                            {selectedLead.preferences?.bedrooms || "Any"}
-                          </p>
-                        </div>
-                        <div className="text-center p-3 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Bathrooms</p>
-                          <p className="text-lg font-semibold text-slate-900 mt-1">
-                            {selectedLead.preferences?.bathrooms || "Any"}
-                          </p>
-                        </div>
-                        <div className="text-center p-3 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Property Types</p>
-                          <p className="text-lg font-semibold text-slate-900 mt-1">
-                            {selectedLead.preferences?.propertyTypes?.length || 0}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <p className="text-sm font-medium text-slate-600 mb-2">Property Types</p>
-                        <div className="flex flex-wrap gap-1">
-                          {selectedLead.preferences?.propertyTypes?.map((type, index) => (
-                            <Badge key={index} variant="secondary" className="bg-indigo-50">
-                              {type}
-                            </Badge>
-                          )) || "Not specified"}
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <p className="text-sm font-medium text-slate-600 mb-2">Preferred Locations</p>
-                        <div className="flex flex-wrap gap-1">
-                          {selectedLead.preferences?.locations?.map((location, index) => (
-                            <Badge key={index} variant="secondary" className="bg-purple-50">
-                              {location}
-                            </Badge>
-                          )) || "Not specified"}
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <p className="text-sm font-medium text-slate-600 mb-2">Desired Features</p>
-                        <div className="flex flex-wrap gap-1">
-                          {selectedLead.preferences?.features?.map((feature, index) => (
-                            <Badge key={index} variant="outline">
-                              {feature}
-                            </Badge>
-                          )) || "Not specified"}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </>
-              )}
-
-              {/* Seller-specific information */}
-              {selectedLead.type === 'Seller' && (
-                <>
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold text-slate-900">Property Details</h3>
-                    <div className="flex items-center space-x-2">
-                      <Badge variant="outline" className="bg-indigo-50">
-                        {selectedLead.timeline || "No timeline"}
-                      </Badge>
-                      {selectedLead.motivation && (
-                        <Badge variant="outline" className="bg-purple-50">
-                          {selectedLead.motivation}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Property Address & Value */}
-                  <Card>
-                    <CardHeader className="p-4 pb-2">
-                      <CardTitle className="text-sm font-medium text-slate-600">
-                        <div className="flex items-center">
-                          <Building className="h-4 w-4 mr-2 text-indigo-500" />
-                          Property Information
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-1 space-y-4">
-                      <div className="bg-slate-50 p-3 rounded-lg">
-                        <p className="text-sm text-slate-500">Property Address</p>
-                        <p className="text-base font-medium text-slate-900 mt-1">
-                          {selectedLead.property?.address || "Not specified"}
-                        </p>
-                      </div>
-                      
-                      <div className="flex space-x-4">
-                        <div className="flex-1 text-center p-3 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Property Type</p>
-                          <p className="text-base font-semibold text-slate-900 mt-1">
-                            {selectedLead.property?.type || "N/A"}
-                          </p>
-                        </div>
-                        <div className="flex-1 text-center p-3 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Estimated Value</p>
-                          <p className="text-base font-semibold text-slate-900 mt-1">
-                            {selectedLead.property?.estimatedValue ? formatCurrency(selectedLead.property.estimatedValue) : "N/A"}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-4 gap-3">
-                        <div className="text-center p-2 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Beds</p>
-                          <p className="text-base font-semibold text-slate-900">
-                            {selectedLead.property?.bedrooms || "N/A"}
-                          </p>
-                        </div>
-                        <div className="text-center p-2 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Baths</p>
-                          <p className="text-base font-semibold text-slate-900">
-                            {selectedLead.property?.bathrooms || "N/A"}
-                          </p>
-                        </div>
-                        <div className="text-center p-2 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Sq. Ft.</p>
-                          <p className="text-base font-semibold text-slate-900">
-                            {selectedLead.property?.area || "N/A"}
-                          </p>
-                        </div>
-                        <div className="text-center p-2 bg-slate-50 rounded-lg">
-                          <p className="text-xs text-slate-500">Year</p>
-                          <p className="text-base font-semibold text-slate-900">
-                            {selectedLead.property?.yearBuilt || "N/A"}
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Property Features & Marketing Preferences */}
-                  <Card>
-                    <CardHeader className="p-4 pb-2">
-                      <CardTitle className="text-sm font-medium text-slate-600">
-                        <div className="flex items-center">
-                          <Star className="h-4 w-4 mr-2 text-amber-500" />
-                          Features & Marketing
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-1 space-y-4">
-                      <div>
-                        <p className="text-sm font-medium text-slate-600 mb-2">Property Features</p>
-                        <div className="flex flex-wrap gap-1">
-                          {selectedLead.property?.features?.map((feature, index) => (
-                            <Badge key={index} variant="outline">
-                              {feature}
-                            </Badge>
-                          )) || "None specified"}
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <p className="text-sm font-medium text-slate-600 mb-2">Marketing Preferences</p>
-                        <div className="flex flex-wrap gap-1">
-                          {selectedLead.marketingPreferences?.map((pref, index) => (
-                            <Badge key={index} variant="secondary" className="bg-purple-50">
-                              {pref}
-                            </Badge>
-                          )) || "None specified"}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </>
-              )}
-            </TabsContent>
-
-            {/* Activity Tab */}
-            <TabsContent value="activity" className="p-6 pb-20 mt-0">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-slate-900">Activity Timeline</h3>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Activity
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-80">
-                    <div className="space-y-4">
-                      <h4 className="font-medium">Add New Activity</h4>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select activity type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="note">Note</SelectItem>
-                          <SelectItem value="email">Email</SelectItem>
-                          <SelectItem value="call">Call</SelectItem>
-                          <SelectItem value="meeting">Meeting</SelectItem>
-                          <SelectItem value="showing">Showing</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <Textarea 
-                        placeholder="Activity details..."
-                        className="min-h-20"
-                      />
-                      <div className="flex justify-end">
-                        <Button size="sm">
-                          Save Activity
-                        </Button>
-                      </div>
-                    </div>
-                  </PopoverContent>
-                </Popover>
-              </div>
-              
-              {selectedLead.activities && selectedLead.activities.length > 0 ? (
-                <div className="space-y-4">
-                  {selectedLead.activities.slice().reverse().map((activity) => (
-                    <Card key={activity.id} className="overflow-hidden">
-                      <div className="flex border-l-4 border-l-slate-300 hover:border-l-indigo-500 transition-colors">
-                        <div className="p-4 flex">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 mr-3 flex-shrink-0">
-                            {activity.type === 'Note' && <FileText className="h-5 w-5 text-slate-600" />}
-                            {activity.type === 'Email' && <Mail className="h-5 w-5 text-blue-600" />}
-                            {activity.type === 'Call' && <Phone className="h-5 w-5 text-green-600" />}
-                            {activity.type === 'Meeting' && <Users className="h-5 w-5 text-purple-600" />}
-                            {activity.type === 'Showing' && <Home className="h-5 w-5 text-amber-600" />}
-                            {activity.type === 'Status Change' && <ArrowRight className="h-5 w-5 text-indigo-600" />}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-medium text-slate-900 truncate">{activity.type}</h4>
-                              <time className="text-xs text-slate-500">{format(new Date(activity.date), 'MMM d, yyyy')}</time>
-                            </div>
-                            <p className="mt-1 text-sm text-slate-600">{activity.content}</p>
-                            <div className="mt-2 flex items-center">
-                              <div className="flex-shrink-0">
-                                <Avatar className="h-6 w-6">
-                                  <AvatarFallback className="text-xs bg-slate-200">
-                                    {getInitials(activity.user)}
-                                  </AvatarFallback>
-                                </Avatar>
-                              </div>
-                              <div className="ml-2 flex items-center text-xs text-slate-500">
-                                <p>{activity.user}</p>
-                                <span className="mx-1">•</span>
-                                <time>{format(new Date(activity.date), 'h:mm a')}</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <Card className="p-8 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
-                    <Clock className="h-6 w-6 text-slate-600" />
-                  </div>
-                  <CardTitle className="mt-4">No activity recorded yet</CardTitle>
-                  <CardDescription className="mt-2">
-                    Add your first activity to start tracking interactions with this lead.
-                  </CardDescription>
-                  <div className="mt-6">
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button>
-                          <Plus className="h-4 w-4 mr-2" />
-                          Add Activity
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80">
-                        <div className="space-y-4">
-                          <h4 className="font-medium">Add New Activity</h4>
-                          <Select>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select activity type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="note">Note</SelectItem>
-                              <SelectItem value="email">Email</SelectItem>
-                              <SelectItem value="call">Call</SelectItem>
-                              <SelectItem value="meeting">Meeting</SelectItem>
-                              <SelectItem value="showing">Showing</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <Textarea 
-                            placeholder="Activity details..."
-                            className="min-h-20"
-                          />
-                          <div className="flex justify-end">
-                            <Button size="sm">
-                              Save Activity
-                            </Button>
-                          </div>
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                </Card>
-              )}
-            </TabsContent>
-          </ScrollArea>
-        </Tabs>
-
-        {/* Footer Actions */}
-        <div className="p-4 border-t mt-auto">
-          <div className="flex justify-between">
-            <Button 
-              variant="outline" 
-              onClick={() => setDetailsOpen(false)}
-            >
-              Close
-            </Button>
-            <div className="flex space-x-2">
-              <Button 
-                variant="outline"
-                className="border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100"
-                onClick={() => openUpdateForm(selectedLead)}
-              >
-                <Edit2 className="h-4 w-4 mr-2" />
-                Edit Lead
-              </Button>
-              <Button>
-                <Plus className="h-4 w-4 mr-2" />
-                Add Activity
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-  </SheetContent>
-</Sheet>
+                    )}
+                </SheetContent>
+            </Sheet>
 
             {/* Create Lead Modal */}
             <Dialog open={createModalOpen} onOpenChange={setCreateModalOpen}>
@@ -2637,27 +2649,7 @@ const LeadsPage = () => {
     );
 };
 
-// Stub implementations for missing components
-const QuickStatusUpdate = ({ leadId, currentStatus, onStatusChange }) => {
-    return (
-        <Select
-            onValueChange={(value) => onStatusChange(leadId, value)}
-            value={currentStatus}
-        >
-            <SelectTrigger>
-                <SelectValue placeholder="Update Status" />
-            </SelectTrigger>
-            <SelectContent>
-                {leadStatuses.map((status) => (
-                    <SelectItem key={status.value} value={status.value}>
-                        {status.label}
-                    </SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
-    );
-};
-
+// Modernized LeadCard Component
 const LeadCard = ({ lead, onViewDetails, onEdit, onStatusChange }) => {
     const getStatusBadgeVariant = (status) => {
         const leadStatuses = [
@@ -2669,12 +2661,14 @@ const LeadCard = ({ lead, onViewDetails, onEdit, onStatusChange }) => {
             { value: "Closed", label: "Closed", color: "primary" },
             { value: "Cold", label: "Cold", color: "destructive" }
         ];
-
         return leadStatuses.find(s => s.value === status)?.color || "default";
     };
     return (
-        <Card onClick={() => onViewDetails(lead)} className="cursor-pointer hover:shadow-lg">
-            <CardHeader>
+        <Card 
+            onClick={() => onViewDetails(lead)} 
+            className="cursor-pointer bg-white rounded-lg shadow-md transition-transform transform hover:scale-105"
+        >
+            <CardHeader className="p-4">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-3">
                         <Avatar>
@@ -2682,14 +2676,14 @@ const LeadCard = ({ lead, onViewDetails, onEdit, onStatusChange }) => {
                             <AvatarImage src={`https://ui-avatars.com/api/?name=${encodeURIComponent(lead.name)}`} />
                         </Avatar>
                         <div>
-                            <CardTitle>{lead.name}</CardTitle>
-                            <CardDescription>{lead.email}</CardDescription>
+                            <CardTitle className="text-lg font-semibold">{lead.name}</CardTitle>
+                            <CardDescription className="text-sm text-gray-500">{lead.email}</CardDescription>
                         </div>
                     </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon">
-                                <MoreHorizontal className="h-4 w-4" />
+                                <MoreHorizontal className="h-5 w-5" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
@@ -2699,20 +2693,21 @@ const LeadCard = ({ lead, onViewDetails, onEdit, onStatusChange }) => {
                     </DropdownMenu>
                 </div>
             </CardHeader>
-            <CardContent>
-                <p className="text-sm">{lead.notes}</p>
+            <CardContent className="px-4 pb-4">
+                <p className="text-sm text-gray-700">{lead.notes}</p>
             </CardContent>
-            <CardFooter className="flex justify-between">
-                <div className='flex space-x-2'>
+            <CardFooter className="px-4 py-2 flex justify-between items-center border-t">
+                <div className="flex space-x-2">
                     <Badge>{lead.type}</Badge>
                     <Badge variant={getStatusBadgeVariant(lead.status)}>{lead.status}</Badge>
                 </div>
-                <span className="text-sm text-slate-500">{formatDate(lead.createdAt)}</span>
+                <span className="text-sm text-gray-500">{formatDate(lead.createdAt)}</span>
             </CardFooter>
         </Card>
     );
 };
 
+// Modernized LeadsTable Component
 const LeadsTable = ({ leads, onViewDetails, onEdit, onStatusChange }) => {
     const getStatusBadgeVariant = (status) => {
         const leadStatuses = [
@@ -2724,38 +2719,42 @@ const LeadsTable = ({ leads, onViewDetails, onEdit, onStatusChange }) => {
             { value: "Closed", label: "Closed", color: "primary" },
             { value: "Cold", label: "Cold", color: "destructive" }
         ];
-
         return leadStatuses.find(s => s.value === status)?.color || "default";
     };
     return (
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Phone</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Actions</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {leads.map(lead => (
-                    <TableRow key={lead.id}>
-                        <TableCell>{lead.name}</TableCell>
-                        <TableCell>{lead.email}</TableCell>
-                        <TableCell>{lead.type}</TableCell>
-                        <TableCell>{lead.phone}</TableCell>
-                        <TableCell>
-                            <Badge variant={getStatusBadgeVariant(lead.status)}>{lead.status}</Badge>
-                        </TableCell>
-                        <TableCell>
-                            <Button size="sm" onClick={() => onViewDetails(lead)}>View</Button>
-                        </TableCell>
+        <div className="overflow-x-auto">
+            <Table className="min-w-full divide-y divide-gray-200">
+                <TableHeader className="bg-gray-50">
+                    <TableRow>
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</TableHead>
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</TableHead>
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</TableHead>
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</TableHead>
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</TableHead>
+                        <TableHead className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</TableHead>
                     </TableRow>
-                ))}
-            </TableBody>
-        </Table>
+                </TableHeader>
+                <TableBody className="bg-white divide-y divide-gray-200">
+                    {leads.map(lead => (
+                        <TableRow 
+                            key={lead.id} 
+                            className="hover:bg-gray-50 transition-colors"
+                        >
+                            <TableCell className="px-6 py-4 whitespace-nowrap">{lead.name}</TableCell>
+                            <TableCell className="px-6 py-4 whitespace-nowrap">{lead.email}</TableCell>
+                            <TableCell className="px-6 py-4 whitespace-nowrap">{lead.type}</TableCell>
+                            <TableCell className="px-6 py-4 whitespace-nowrap">{lead.phone}</TableCell>
+                            <TableCell className="px-6 py-4 whitespace-nowrap">
+                                <Badge variant={getStatusBadgeVariant(lead.status)}>{lead.status}</Badge>
+                            </TableCell>
+                            <TableCell className="px-6 py-4 whitespace-nowrap text-center">
+                                <Button size="sm" onClick={() => onViewDetails(lead)}>View</Button>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
     );
 };
 

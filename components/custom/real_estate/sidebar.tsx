@@ -3,7 +3,7 @@ import {
     Home,
     Users,
     Building,
-    PieChart,
+    PhoneCall,
     Calendar,
     FileText,
     Settings,
@@ -56,7 +56,7 @@ const Sidebar = ({ activePage = 'dashboard' }) => {
         { name: 'Leads', icon: <Users size={20} />, href: '/dashboard/leads', active: activePage === 'leads' },
         { name: 'Calendar', icon: <Calendar size={20} />, href: '/dashboard/calendar', active: activePage === 'calendar' },
         { name: 'Contracts', icon: <FileText size={20} />, href: '/dashboard/contracts', active: activePage === 'contracts' },
-        { name: 'Analytics', icon: <PieChart size={20} />, href: '/dashboard/analytics', active: activePage === 'analytics' },
+        { name: 'AI Calls', icon: <PhoneCall size={20} />, href: '/dashboard/calls', active: activePage === 'calls' },
     ];
 
     const bottomNavigationItems = [

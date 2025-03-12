@@ -42,22 +42,22 @@ const LandingPage = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      
+
       const sections = document.querySelectorAll('section[id]');
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
-        
+
         if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
           setActiveSection(sectionId);
         }
       });
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -66,7 +66,7 @@ const LandingPage = () => {
     testimonialIntervalRef.current = setInterval(() => {
       setActiveTestimonial(prev => (prev + 1) % testimonials.length);
     }, 8000);
-    
+
     return () => clearInterval(testimonialIntervalRef.current);
   }, []);
 
@@ -76,7 +76,7 @@ const LandingPage = () => {
     const scrollValue = Math.min(scrollY, 500);
     const opacity = 1 - scrollValue / 500;
     const translateY = scrollValue * 0.5;
-    
+
     return {
       opacity: Math.max(0, opacity),
       transform: `translateY(${translateY}px)`
@@ -256,7 +256,7 @@ const LandingPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-800 overflow-hidden">
       {/* Custom cursor */}
       {showCursor && (
-        <div 
+        <div
           className={`fixed pointer-events-none z-50 flex items-center justify-center transition-all duration-100 ${cursorText ? 'h-24 w-24 rounded-full bg-indigo-500/20 backdrop-blur-sm border border-indigo-400/30' : 'h-6 w-6 rounded-full bg-indigo-500'}`}
           style={{
             left: `${cursorPosition.x}px`,
@@ -282,10 +282,14 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
-                <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">PropertyPro</span>
-                <span className="ml-1 text-lg font-semibold text-slate-500">AI</span>
+              <div>
+                <div className="flex-shrink-0 flex items-center">
+                  <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">PropertyPro</span>
+                  <span className="ml-1 text-xl font-semibold text-slate-500">AI</span>
+                </div>
+                <a target='_blank' href="https://www.primedepthlabs.com/">Powered by Prime Depth Labs</a>
               </div>
+
               <div className="hidden md:ml-10 md:flex md:space-x-10">
                 <a href="#home" className={`text-sm font-medium ${activeSection === 'home' ? 'text-indigo-600' : 'text-slate-600 hover:text-indigo-600'} transition-colors duration-200`}>
                   Home
@@ -305,8 +309,8 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="hidden md:flex items-center">
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 className="group relative overflow-hidden ml-8 px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
                 onMouseEnter={handleCallToActionHover}
                 onMouseLeave={handleCallToActionLeave}
@@ -385,7 +389,7 @@ const LandingPage = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate/[0.05] bg-[length:30px_30px]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div ref={heroRef} style={calculateHeroTransform()} className="lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-6 flex flex-col justify-center mb-12 lg:mb-0">
@@ -400,11 +404,11 @@ const LandingPage = () => {
                   Real Estate Business
                 </span>
               </h1>
-              
+
               <p className="mt-6 text-xl text-slate-600 leading-relaxed max-w-2xl">
                 The all-in-one intelligent platform that transforms leads into clients and properties into profits with AI-driven insights and automation.
               </p>
-              
+
               <div className="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                 <a
                   href="#contact"
@@ -418,7 +422,7 @@ const LandingPage = () => {
                   </span>
                   <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-purple-600 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
-                
+
                 <a
                   href="#features"
                   className="px-8 py-4 rounded-full bg-white text-slate-700 font-medium text-center border border-slate-200 hover:border-indigo-200 hover:bg-slate-50 transition-all duration-300"
@@ -445,10 +449,10 @@ const LandingPage = () => {
                 <div className="relative w-full max-w-2xl perspective-1000">
                   <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-slate-200 transform rotate-2 hover:rotate-0 transition-all duration-700 hover:scale-105">
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 z-10"></div>
-                    <img 
-                      src="https://images.unsplash.com/photo-1565402170291-8491f14678db?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D" 
-                      alt="PropertyPro AI Dashboard" 
-                      className="w-full h-auto" 
+                    <img
+                      src="https://images.unsplash.com/photo-1565402170291-8491f14678db?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                      alt="PropertyPro AI Dashboard"
+                      className="w-full h-auto"
                     />
                     {/* Floating UI elements */}
                     <div className="absolute top-5 left-5 p-3 bg-white/80 backdrop-blur-md rounded-lg text-slate-700 text-sm z-20 shadow-lg transform hover:-translate-y-1 transition-transform">
@@ -486,7 +490,7 @@ const LandingPage = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate/[0.03] bg-[length:30px_30px]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="lg:text-center mb-16">
             <h2 className="inline-block text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 uppercase tracking-wider mb-3">Features</h2>
@@ -500,8 +504,8 @@ const LandingPage = () => {
 
           <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`group relative overflow-hidden rounded-3xl transition-all duration-500 ${hoverFeature === index ? 'scale-105 z-10' : 'scale-100 z-0'}`}
                 onMouseEnter={() => handleFeatureHover(index)}
                 onMouseLeave={handleFeatureLeave}
@@ -513,7 +517,7 @@ const LandingPage = () => {
                 <div className="h-full p-8 rounded-3xl bg-white shadow-lg hover:shadow-xl border border-slate-100 hover:border-indigo-100 transition-all duration-300 relative z-10">
                   {/* Gradient background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`}></div>
-                  
+
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-6">
                       <div className="p-3 rounded-2xl bg-slate-50 group-hover:bg-indigo-50 transition-colors duration-300">
@@ -521,7 +525,7 @@ const LandingPage = () => {
                       </div>
                       <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-indigo-500 transition-colors duration-300" />
                     </div>
-                    
+
                     <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-indigo-700 transition-colors duration-300">{feature.title}</h3>
                     <p className="text-slate-600 group-hover:text-slate-700 transition-colors duration-300">{feature.description}</p>
                   </div>
@@ -537,7 +541,7 @@ const LandingPage = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate/[0.03] bg-[length:30px_30px]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="lg:text-center mb-16">
             <h2 className="inline-block text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 uppercase tracking-wider mb-3">Pricing</h2>
@@ -551,7 +555,7 @@ const LandingPage = () => {
 
           <div className="flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-4 lg:space-x-8 justify-center items-center">
             {pricingPlans.map((plan, index) => (
-              <div 
+              <div
                 key={index}
                 className={`w-full md:w-96 ${activePlan === index ? 'md:scale-110 z-10' : 'scale-100 z-0'} transition-all duration-500`}
                 onMouseEnter={() => {
@@ -568,19 +572,18 @@ const LandingPage = () => {
                       <span className="text-5xl font-extrabold text-slate-900">{plan.price}</span>
                       <span className="text-slate-500 ml-2">{plan.period}</span>
                     </div>
-                    
+
                     <a
                       href="#contact"
-                      className={`mt-8 block w-full py-3 px-6 rounded-xl shadow text-center font-medium transition-all duration-300 ${
-                        activePlan === index
+                      className={`mt-8 block w-full py-3 px-6 rounded-xl shadow text-center font-medium transition-all duration-300 ${activePlan === index
                           ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-100'
                           : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                      }`}
+                        }`}
                     >
                       {plan.cta}
                     </a>
                   </div>
-                  
+
                   <div className="p-8 bg-slate-50">
                     <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Features</h4>
                     <ul className="mt-6 space-y-4">
@@ -604,7 +607,7 @@ const LandingPage = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate/[0.03] bg-[length:30px_30px]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="lg:text-center mb-16">
             <h2 className="inline-block text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 uppercase tracking-wider mb-3">Testimonials</h2>
@@ -621,7 +624,7 @@ const LandingPage = () => {
             <div className="relative overflow-hidden rounded-3xl bg-white shadow-xl border border-slate-100">
               <div className="relative h-96 overflow-hidden">
                 {testimonials.map((testimonial, index) => (
-                  <div 
+                  <div
                     key={index}
                     className={`absolute inset-0 p-12 transition-all duration-1000 ease-in-out flex flex-col justify-center
                     ${activeTestimonial === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
@@ -661,9 +664,8 @@ const LandingPage = () => {
                 <button
                   key={index}
                   onClick={() => setActiveTestimonial(index)}
-                  className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                    activeTestimonial === index ? 'w-8 bg-indigo-500' : 'bg-slate-300'
-                  }`}
+                  className={`h-2 w-2 rounded-full transition-all duration-300 ${activeTestimonial === index ? 'w-8 bg-indigo-500' : 'bg-slate-300'
+                    }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 ></button>
               ))}
@@ -677,7 +679,7 @@ const LandingPage = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate/[0.03] bg-[length:30px_30px]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="lg:text-center mb-16">
             <h2 className="inline-block text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 uppercase tracking-wider mb-3">FAQ</h2>
@@ -692,7 +694,7 @@ const LandingPage = () => {
           <div className="mt-12 max-w-3xl mx-auto">
             <div className="space-y-6">
               {faqItems.map((faq, index) => (
-                <div 
+                <div
                   key={index}
                   className="rounded-2xl border border-slate-200 overflow-hidden bg-white hover:border-indigo-100 hover:shadow-md transition-all duration-300"
                 >
@@ -727,7 +729,7 @@ const LandingPage = () => {
           <div className="h-full w-full bg-gradient-to-b from-indigo-50/50 to-purple-50/50" />
           <div className="absolute inset-0 bg-grid-slate/[0.03] bg-[length:30px_30px]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="lg:text-center mb-16">
             <h2 className="inline-block text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 uppercase tracking-wider mb-3">Get Started</h2>
@@ -872,7 +874,7 @@ const LandingPage = () => {
                 </a>
               </div>
             </div>
-            
+
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Product</h3>
               <ul className="space-y-3">
@@ -902,8 +904,8 @@ const LandingPage = () => {
                 </li>
               </ul>
             </div>
-            
-            <div>
+
+            {/* <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Resources</h3>
               <ul className="space-y-3">
                 <li>
@@ -931,27 +933,27 @@ const LandingPage = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-            
+            </div> */}
+
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Contact</h3>
               <ul className="space-y-3">
                 <li className="flex items-center">
                   <Mail className="h-5 w-5 text-indigo-600 mr-3" />
                   <a href="mailto:info@propertypro.ai" className="text-slate-500 hover:text-indigo-600 transition-colors duration-300">
-                    info@propertypro.ai
+                    primedepthlabs@gmail.com
                   </a>
                 </li>
                 <li className="flex items-center">
                   <Phone className="h-5 w-5 text-indigo-600 mr-3" />
                   <a href="tel:+15555555555" className="text-slate-500 hover:text-indigo-600 transition-colors duration-300">
-                    +1 (555) 555-5555
+                    +918146851290
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-          
+
           <div className="mt-12 pt-8 border-t border-slate-200">
             <p className="text-slate-500 text-center">
               &copy; 2025 PropertyPro AI. All rights reserved.
