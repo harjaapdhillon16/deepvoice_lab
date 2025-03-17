@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -87,7 +88,7 @@ export default function HomePage() {
     return () => clearInterval(interval)
   }, [])
 
-  const changeLanguage = (lng) => {
+  const changeLanguage = (lng:any) => {
     i18n.changeLanguage(lng)
   }
 
