@@ -287,11 +287,11 @@ export default function HomePage() {
             {t('hero.platformTag')}
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-200 to-emerald-300 tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-200 to-emerald-300 tracking-tight leading-tight">
             {t('hero.title')}
           </h1>
 
-          <p className="text-xl text-gray-400 max-w-2xl mb-12">{t('hero.subtitle')}</p>
+          <p className="md:text-xl text-md text-gray-400 max-w-2xl mb-12">{t('hero.subtitle')}</p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-20">
             <Link href="/signup">
