@@ -208,10 +208,10 @@ export default function Settings() {
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" className="flex items-center gap-2 text-sm">
                                     <Avatar className="h-8 w-8">
-                                        <AvatarImage src={userData.avatar} alt="User" />
+                                        <AvatarImage src={userProfile?.avatar} alt="User" />
                                         <AvatarFallback>U</AvatarFallback>
                                     </Avatar>
-                                    <span className="hidden md:inline">{userData.name}</span>
+                                    <span className="hidden md:inline">{userProfile?.name}</span>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-56 bg-gray-900 border-gray-800">
@@ -250,10 +250,10 @@ export default function Settings() {
                             <CardContent className="space-y-4">
                                 <div className="flex flex-col items-center py-4">
                                     <Avatar className="h-20 w-20 border-2 border-gray-700 mb-4">
-                                        <AvatarImage src={userData.avatar} alt={userProfile.name} />
-                                        <AvatarFallback className="text-xl">{userProfile.name.charAt(0)}</AvatarFallback>
+                                        <AvatarImage src={userData?.avatar} alt={userProfile?.name} />
+                                        <AvatarFallback className="text-xl">{userProfile?.name?.charAt(0)}</AvatarFallback>
                                     </Avatar>
-                                    <h2 className="text-lg font-medium text-white">{userProfile.name}</h2>
+                                    <h2 className="text-lg font-medium text-white">{userProfile?.name}</h2>
                                 </div>
 
                                 <Separator className="bg-gray-800" />
