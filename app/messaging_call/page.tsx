@@ -28,7 +28,6 @@ import {
 import { useTranslation } from 'next-i18next'
 import { useUnauthenticatedLayout } from '@/components/common/auth_unauthrouting'
 import { Inter, Space_Grotesk, Outfit } from 'next/font/google'
-import { useSearchParams } from 'next/navigation'
 
 // Import and configure fonts
 const inter = Inter({
@@ -61,16 +60,17 @@ export default function HomePage() {
   const [activeFeature, setActiveFeature] = useState(0)
 
   // Get URL search params
-  const searchParams = useSearchParams()
 
   // Change language if ?lng=... is present
   useEffect(() => {
-    const langParam = searchParams.get('lng')
-    if (langParam) {
-      i18n.changeLanguage(langParam)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const langParam = params.get('lng')
+      if (langParam) {
+        i18n.changeLanguage(langParam)
+      }
     }
-  }, [searchParams, i18n])
-
+  }, [i18n])
 
   useEffect(() => {
     const handleScroll = () => {
