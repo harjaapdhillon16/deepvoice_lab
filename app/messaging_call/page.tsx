@@ -491,7 +491,7 @@ export default function HomePage() {
             <div className="mb-4 md:mb-0">
               <span className="text-2xl font-bold">{t('footer.brand')}</span>
             </div>
-            <div className="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+            {/* <div className="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
               <Link href="/privacy">
                 <span className="text-sm text-gray-500 hover:text-emerald-400 transition-colors">
                   {t('footer.privacy')}
@@ -517,9 +517,9 @@ export default function HomePage() {
                   {t('footer.contact')}
                 </span>
               </Link>
-            </div>
+            </div> */}
             <div className="flex space-x-4">
-              {['twitter', 'linkedin', 'github'].map((social) => (
+              {/* {['twitter', 'linkedin', 'github'].map((social) => (
                 <a
                   key={social}
                   href={`#${social}`}
@@ -534,7 +534,7 @@ export default function HomePage() {
                     />
                   </svg>
                 </a>
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="pt-8 text-center">
