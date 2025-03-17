@@ -1,58 +1,138 @@
 {
+    "home.brand":"Fidelio AI",
     "navigation": {
-        "features": "Características",
-        "process": "Proceso",
+        "howItWorks": "Cómo Funciona",
+        "whyChoose": "Por Qué Fidelio",
         "pricing": "Precios",
-        "login": "Iniciar sesión",
-        "start": "Comenzar"
+        "industries": "Industrias",
+        "login": "Iniciar Sesión",
+        "getStarted": "Comenzar"
     },
     "hero": {
-        "title": "Tecnología de llamadas IA de nueva generación",
-        "subtitle": "Conversaciones sin esfuerzo. Escalabilidad perfecta. Posibilidades infinitas.",
-        "getStarted": "Comenzar",
-        "watchDemo": "Ver demostración",
-        "trial": "Sin tarjeta de crédito • Prueba gratuita de 14 días"
+        "title": "🚀 Convierte Leads Automáticamente con Fidelio Impulsado por IA",
+        "subtitle": "🔹 Transforma conversaciones en ventas con automatización de WhatsApp.\n🔹 Conversión de leads impulsada por IA - califica y nutre leads automáticamente.\n🔹 Cierra tratos sin esfuerzo mientras Fidelio maneja seguimientos y puntuaciones.",
+        "getStarted": "Comienza Ahora",
+        "scheduleDemo": "Programa una Demo",
+        "platformTag":"IA de Nueva Generación"
     },
-    "features": {
-        "coreTitle": "Características principales",
-        "description": "Diseño minimalista. Impacto máximo.",
-        "list": [
+    "aiFeatures": {
+        "0": {
+            "title": "Procesamiento de Lenguaje Natural",
+            "description": "Procesa y comprende el lenguaje humano con precisión de vanguardia."
+        },
+        "1": {
+            "title": "Análisis Predictivo",
+            "description": "Pronostica tendencias y resultados utilizando modelos avanzados de aprendizaje automático."
+        },
+        "2": {
+            "title": "Redes Neuronales",
+            "description": "Arquitectura de aprendizaje profundo que imita la funcionalidad del cerebro humano."
+        },
+        "3": {
+            "title": "Generación de Contenido",
+            "description": "Crea contenido de alta calidad en segundos con nuestra IA creativa."
+        }
+    },
+    "howItWorks": {
+        "title": "Cómo Funciona",
+        "steps": [
             {
-                "title": "Voz hiperrealista",
-                "description": "Indistinguible de una conversación humana."
+                "icon": "1️⃣",
+                "title": "IA Captura Leads",
+                "description": "Captura automáticamente leads de conversaciones de WhatsApp."
             },
             {
-                "title": "Conciencia contextual",
-                "description": "Se adapta en tiempo real al flujo de conversación."
+                "icon": "2️⃣",
+                "title": "Seguimientos Automatizados",
+                "description": "Seguimiento 24/7 para calificar y nutrir leads."
             },
             {
-                "title": "Seguridad empresarial",
-                "description": "Encriptación de extremo a extremo y cumplimiento."
+                "icon": "3️⃣",
+                "title": "Puntuación Inteligente",
+                "description": "Identifica compradores de alto potencial con puntuación impulsada por IA."
             },
             {
-                "title": "Escalabilidad infinita",
-                "description": "Miles de llamadas concurrentes sin pérdida de calidad."
-            },
-            {
-                "title": "Integración con CRM",
-                "description": "Conexión sin fisuras con tu stack existente."
-            },
-            {
-                "title": "Analíticas avanzadas",
-                "description": "Perspectivas profundas en cada interacción."
+                "icon": "4️⃣",
+                "title": "Traspaso Perfecto",
+                "description": "Pasa sin esfuerzo leads calificados a tu equipo de ventas."
             }
         ]
     },
+    "whyChoose": {
+        "title": "¿Por Qué Elegir Fidelio?",
+        "features": [
+            {
+                "icon": "✅",
+                "title": "Calificación de Leads Impulsada por IA",
+                "description": "Enfócate solo en compradores con alta intención con IA inteligente."
+            },
+            {
+                "icon": "✅",
+                "title": "Automatización de WhatsApp",
+                "description": "Interactúa con prospectos instantáneamente, 24/7."
+            },
+            {
+                "icon": "✅",
+                "title": "Optimización del Embudo de Ventas",
+                "description": "Mueve leads suavemente a través de tu pipeline de ventas."
+            },
+            {
+                "icon": "✅",
+                "title": "Integración Perfecta con CRM",
+                "description": "Conéctate con tus herramientas existentes sin esfuerzo."
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Planes de Precios",
+        "description": "Explora nuestros precios competitivos. Más detalles próximamente.",
+        "comingSoon": "Próximamente"
+    },
+    "cta": {
+        "title": "Comienza Hoy",
+        "getStarted": "Comienza Hoy",
+        "talkToExpert": "Habla con un Experto"
+    },
+    "industries": {
+        "title": "Industrias que Servimos",
+        "list": [
+            {
+                "icon": "📌",
+                "text": "Concesionarios de Automóviles – Automatiza la captura y calificación de leads."
+            },
+            {
+                "icon": "📌",
+                "text": "Bienes Raíces – Convierte consultas en compradores automáticamente."
+            },
+            {
+                "icon": "📌",
+                "text": "E-commerce y Retail – Asistente de ventas WhatsApp impulsado por IA."
+            },
+            {
+                "icon": "📌",
+                "text": "Finanzas y Seguros – Automatiza la nutrición de leads y ventas de pólizas."
+            }
+        ]
+    },
+    "footer": {
+        "brand":"FIDELIO AI",
+        "privacy": "Privacidad",
+        "terms": "Términos",
+        "about": "Acerca de",
+        "blog": "Blog",
+        "contact": "Contacto",
+        "rights": "Todos los derechos reservados."
+    },
     "process": {
         "title": "Proceso",
-        "description": "Configuración simple. Resultados poderosos.",
+        "description": "Configuración simple. Resultados potentes.",
         "steps": [
             {
                 "title": "Configurar",
-                "description": "Define objetivos y personaliza tu voz IA."
+                "description": "Establece objetivos y personaliza tu voz de IA."
             },
             {
-                "title": "Desplegar",
+                "title": "Implementar",
                 "description": "Lanza tu campaña con un solo clic."
             },
             {
@@ -61,154 +141,130 @@
             }
         ]
     },
-    "pricing": {
-        "title": "Precios",
-        "description": "Transparente. Flexible. Sin cargos ocultos.",
-        "plans": {
-            "basic": {
-                "name": "Básico",
-                "price": "$99",
-                "period": "/mes",
-                "description": "Para equipos pequeños",
-                "features": [
-                    "500 minutos de llamadas IA",
-                    "3 perfiles de voz",
-                    "Analíticas básicas",
-                    "Soporte por email"
-                ],
-                "cta": "Comenzar"
-            },
-            "pro": {
-                "name": "Profesional",
-                "price": "$299",
-                "period": "/mes",
-                "description": "Para negocios en crecimiento",
-                "features": [
-                    "2,000 minutos de llamadas IA",
-                    "10 perfiles de voz",
-                    "Analíticas avanzadas",
-                    "Soporte prioritario",
-                    "Todas las integraciones"
-                ],
-                "cta": "Comenzar",
-                "highlighted": true
-            },
-            "enterprise": {
-                "name": "Empresarial",
-                "price": "Personalizado",
-                "period": "",
-                "description": "Para grandes operaciones",
-                "features": [
-                    "Minutos ilimitados",
-                    "Perfiles ilimitados",
-                    "Dashboard en tiempo real",
-                    "Gerente dedicado",
-                    "Desarrollo personalizado",
-                    "Garantías SLA"
-                ],
-                "cta": "Contacto"
-            }
-        }
-    },
-    "cta": {
-        "title": "Experimenta el futuro de las llamadas IA",
-        "subTitle": "Comienza tu prueba gratuita hoy. Sin tarjeta de crédito.",
-        "button": "Comenzar"
-    },
-    "footer": {
-        "privacy": "Privacidad",
-        "terms": "Términos",
-        "about": "Acerca de",
-        "blog": "Blog",
-        "contact": "Contacto",
-        "rights": "© 2025 AI Nexus. Todos los derechos reservados."
-    },
-    "signup": {
-        "title": "Crea tu cuenta",
-        "subtitle": "Comienza tu prueba gratuita de 14 días, sin necesidad de tarjeta de crédito",
-        "googleButton": "Regístrate con Google",
-        "orContinueWith": "o continúa con",
-        "fullName": "Nombre completo",
-        "namePlaceholder": "Ingresa tu nombre",
-        "emailAddress": "Correo electrónico",
-        "emailPlaceholder": "tú@ejemplo.com",
-        "password": "Contraseña",
-        "passwordPlaceholder": "Crea una contraseña",
-        "passwordNote": "Debe tener al menos 8 caracteres",
-        "createAccountButton": "Crear cuenta",
-        "agreeText": "Al registrarte, aceptas nuestros",
-        "terms": "Términos de servicio",
-        "andText": "y",
-        "privacyPolicy": "Política de privacidad",
-        "alreadyAccount": "¿Ya tienes una cuenta?",
-        "login": "Inicia sesión",
-        "backToHome": "Volver a inicio"
-    },
     "login": {
-        "title": "Bienvenido de nuevo",
-        "subtitle": "Inicia sesión para acceder a tu cuenta",
-        "googleButton": "Inicia sesión con Google",
-        "orContinueWith": "o continúa con",
-        "emailAddress": "Correo electrónico",
-        "emailPlaceholder": "tú@ejemplo.com",
+        "brand": "FIDELIO",
+        "welcomeBack": "Bienvenido de Nuevo",
+        "accessAccount": "Inicia sesión para acceder a tu cuenta",
+        "email": "Dirección de Correo",
+        "emailPlaceholder": "tu@ejemplo.com",
         "password": "Contraseña",
         "passwordPlaceholder": "Ingresa tu contraseña",
-        "forgotPassword": "¿Olvidaste tu contraseña?",
-        "rememberMe": "Recuérdame",
-        "loginButton": "Iniciar sesión",
+        "logIn": "Iniciar Sesión",
+        "loggingIn": "Iniciando Sesión...",
         "noAccount": "¿No tienes una cuenta?",
-        "signup": "Regístrate",
-        "backToHome": "Volver a inicio"
+        "createAccount": "Crea una",
+        "backToHome": "Volver al inicio",
+        "imageAlt": "Banner de Fidelio AI",
+        "imageTitle": "Bienvenido de Nuevo a Fidelio AI",
+        "imageSubtitle": "Empodera a tu equipo con perspectivas impulsadas por IA.",
+        "errors": {
+            "emailRequired": "El correo es obligatorio",
+            "invalidEmail": "Dirección de correo inválida",
+            "passwordRequired": "La contraseña es obligatoria",
+            "generic": "Error al iniciar sesión. Por favor, inténtalo de nuevo."
+        },
+        "hidePassword": "Ocultar contraseña",
+        "showPassword": "Mostrar contraseña"
     },
-   "sidebar": {
-    "dashboard": "Inicio del Panel",
-    "clients": "Clientes",
-    "leads": "Prospectos",
-    "language": "Idioma"
-  },
-  "dashboard": {
-    "title": "Panel de Control",
-    "adminUser": "Administrador",
-    "myAccount": "Mi Cuenta",
-    "profile": "Perfil",
-    "messages": "Mensajes",
-    "logout": "Cerrar sesión",
-    "totalClients": "Total de Clientes",
-    "activeLeads": "Prospectos Activos",
-    "conversionRate": "Tasa de Conversión",
-    "totalEngagements": "Total de Interacciones",
-    "chartSectionTitle": "Análisis de Crecimiento",
-    "chartTitle": "Crecimiento de Clientes y Prospectos",
-    "chartClients": "Clientes",
-    "chartLeads": "Prospectos",
-    "last30Days": "Últimos 30 días",
-    "lastQuarter": "Último trimestre",
-    "lastYear": "Último año",
-    "exportData": "Exportar datos",
-    "businessInfoTitle": "Información del Negocio",
-    "businessInfoDescription": "Actualiza los detalles de tu negocio y la configuración del chatbot",
-    "businessNameLabel": "Nombre del Negocio",
-    "businessNamePlaceholder": "Ingresa el nombre de tu negocio",
-    "chatbotInfoLabel": "Información del Chatbot",
-    "chatbotInfoPlaceholder": "Ingresa información para tu chatbot",
-    "chatbotInfoDescription": "Esta información se usará para personalizar las respuestas de tu chatbot.",
-    "saveButton": "Guardar Información",
-    "resetButton": "Restablecer",
-    "previewTitle": "Vista Rápida",
-    "clientsPreviewTitle": "Clientes",
-    "leadsPreviewTitle": "Prospectos",
-    "addNew": "Agregar Nuevo",
-    "viewAllClients": "Ver Todos los Clientes",
-    "viewAllLeads": "Ver Todos los Prospectos",
-    "recentActivityTitle": "Actividad Reciente",
-    "recentActivityDescription": "Últimas interacciones con clientes y prospectos",
-    "requestedCallback": "solicitó una llamada",
-    "callbackTime": "hace 10 minutos",
-    "callCompletedWith": "Llamada completada con",
-    "callCompletedTime": "hace 45 minutos",
-    "newLeadCreated": "Nuevo prospecto creado:",
-    "newLeadTime": "hace 2 horas",
-    "emailSentTo": "Correo enviado a",
-    "emailSentTime": "hace 3 horas"
-  }
+    "sidebar": {
+        "dashboard": "Inicio del Panel",
+        "clients": "Clientes",
+        "leads": "Leads",
+        "language": "Idioma"
+    },
+    "dashboard": {
+        "title": "Panel de Control",
+        "adminUser": "Usuario Administrador",
+        "myAccount": "Mi Cuenta",
+        "profile": "Perfil",
+        "messages": "Mensajes",
+        "logout": "Cerrar Sesión",
+        "totalClients": "Total de Clientes",
+        "activeLeads": "Leads Activos",
+        "conversionRate": "Tasa de Conversión",
+        "totalEngagements": "Total de Interacciones",
+        "chartSectionTitle": "Análisis de Crecimiento",
+        "chartTitle": "Crecimiento de Clientes y Leads a lo Largo del Tiempo",
+        "chartClients": "Clientes",
+        "chartLeads": "Leads",
+        "last30Days": "Últimos 30 días",
+        "lastQuarter": "Último trimestre",
+        "lastYear": "Último año",
+        "exportData": "Exportar datos",
+        "businessInfoTitle": "Información del Negocio",
+        "businessInfoDescription": "Actualiza los detalles de tu negocio y la configuración del chatbot",
+        "businessNameLabel": "Nombre del Negocio",
+        "businessNamePlaceholder": "Ingresa el nombre de tu negocio",
+        "chatbotInfoLabel": "Información del Chatbot",
+        "chatbotInfoPlaceholder": "Ingresa información para tu chatbot",
+        "chatbotInfoDescription": "Esta información se utilizará para personalizar las respuestas de tu chatbot.",
+        "saveButton": "Guardar Información",
+        "resetButton": "Restablecer",
+        "previewTitle": "Vista Previa Rápida",
+        "clientsPreviewTitle": "Clientes",
+        "leadsPreviewTitle": "Leads",
+        "addNew": "Agregar Nuevo",
+        "viewAllClients": "Ver Todos los Clientes",
+        "viewAllLeads": "Ver Todos los Leads",
+        "recentActivityTitle": "Actividad Reciente",
+        "recentActivityDescription": "Últimas interacciones de clientes y leads",
+        "requestedCallback": "solicitó una devolución de llamada",
+        "callbackTime": "hace 10 minutos",
+        "callCompletedWith": "Llamada completada con",
+        "callCompletedTime": "hace 45 minutos",
+        "newLeadCreated": "Nuevo lead creado:",
+        "newLeadTime": "hace 2 horas",
+        "emailSentTo": "Correo enviado a",
+        "emailSentTime": "hace 3 horas"
+    },
+    "signup": {
+        "brand": "FIDELIO",
+        "joinTitle": "Únete a Fidelio AI",
+        "joinSubtitle": "Experimenta la inteligencia impulsada por IA que trabaja para ti",
+        "navigation": {
+            "howItWorks": "Cómo Funciona",
+            "whyChoose": "Por Qué Elegir",
+            "pricing": "Precios",
+            "industries": "Industrias",
+            "login": "Iniciar Sesión",
+            "getStarted": "Comenzar"
+        },
+        "fullName": "Nombre Completo",
+        "fullNamePlaceholder": "Ingresa tu nombre",
+        "email": "Dirección de Correo",
+        "emailPlaceholder": "tu@ejemplo.com",
+        "organization": "Organización",
+        "organizationPlaceholder": "Nombre de la empresa o equipo",
+        "password": "Contraseña",
+        "passwordTips": "Consejos para Contraseña",
+        "passwordPlaceholder": "Crea una contraseña segura",
+        "passwordCriteria": "Debe tener al menos 8 caracteres",
+        "termsAgreement": "Acepto los",
+        "terms": "Términos",
+        "and": "y",
+        "privacyPolicy": "Política de Privacidad",
+        "createAccount": "Crear Cuenta",
+        "creatingAccount": "Creando Cuenta...",
+        "accountCreated": "¡Cuenta Creada!",
+        "verifyEmail": "Revisa tu correo para verificar tu cuenta.",
+        "continueToLogin": "Continuar al Inicio de Sesión",
+        "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+        "loginNow": "Iniciar Sesión",
+        "backToHome": "Volver al Inicio",
+        "errors": {
+            "nameRequired": "El nombre es obligatorio",
+            "emailRequired": "El correo es obligatorio",
+            "invalidEmail": "Dirección de correo inválida",
+            "organizationRequired": "El nombre de la organización es obligatorio",
+            "passwordRequired": "La contraseña es obligatoria",
+            "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+            "terms": "Debes aceptar los términos",
+            "generic": "Error al crear la cuenta. Por favor, inténtalo de nuevo."
+        },
+        "hidePassword": "Ocultar contraseña",
+        "showPassword": "Mostrar contraseña",
+        "imageAlt": "Banner de Fidelio AI",
+        "imageTitle": "Bienvenido a Fidelio AI",
+        "imageSubtitle": "Empodera a tu equipo con perspectivas impulsadas por IA"
+    }
 }

@@ -1,47 +1,127 @@
 {
+    "home.brand":"Fidelio AI",
     "navigation": {
-        "features": "Features",
-        "process": "Process",
+        "howItWorks": "How It Works",
+        "whyChoose": "Why Fidelio",
         "pricing": "Pricing",
+        "industries": "Industries",
         "login": "Login",
-        "start": "Start"
+        "getStarted": "Get Started"
     },
     "hero": {
-        "title": "Next-Gen AI Calling Technology",
-        "subtitle": "Seamless conversations. Perfect scaling. Infinite possibilities.",
-        "getStarted": "Get Started",
-        "watchDemo": "Watch Demo",
-        "trial": "No credit card required • 14-day free trial"
+        "title": "🚀 Convert Leads Automatically with AI-Powered Fidelio",
+        "subtitle": "🔹 Turn conversations into sales with WhatsApp automation.\n🔹 AI-powered lead conversion – qualify and nurture leads automatically.\n🔹 Close deals effortlessly while Fidelio handles follow-ups and scoring.",
+        "getStarted": "Get Started Now",
+        "scheduleDemo": "Schedule a Demo",
+        "platformTag":"Next Gen AI"
     },
-    "features": {
-        "coreTitle": "Core Features",
-        "description": "Minimalistic design. Maximum impact.",
-        "list": [
+    "aiFeatures": {
+        "0": {
+            "title": "Natural Language Processing",
+            "description": "Process and understand human language with state-of-the-art accuracy."
+        },
+        "1": {
+            "title": "Predictive Analytics",
+            "description": "Forecast trends and outcomes using advanced machine learning models."
+        },
+        "2": {
+            "title": "Neural Networks",
+            "description": "Deep learning architecture that mimics human brain functionality."
+        },
+        "3": {
+            "title": "Content Generation",
+            "description": "Create high-quality content in seconds with our creative AI."
+        }
+    },
+    "howItWorks": {
+        "title": "How It Works",
+        "steps": [
             {
-                "title": "Hyper-Realistic Voice",
-                "description": "Indistinguishable from human conversation."
+                "icon": "1️⃣",
+                "title": "AI Captures Leads",
+                "description": "Automatically capture leads from WhatsApp conversations."
             },
             {
-                "title": "Context Awareness",
-                "description": "Adapts in real-time to any conversation flow."
+                "icon": "2️⃣",
+                "title": "Automated Follow-Ups",
+                "description": "Follow up 24/7 to qualify and nurture leads."
             },
             {
-                "title": "Enterprise Security",
-                "description": "End-to-end encryption and compliance."
+                "icon": "3️⃣",
+                "title": "Smart Scoring",
+                "description": "Identify high-potential buyers with AI-driven scoring."
             },
             {
-                "title": "Infinite Scaling",
-                "description": "Thousands of concurrent calls without quality loss."
-            },
-            {
-                "title": "CRM Integration",
-                "description": "Seamless connection with your existing stack."
-            },
-            {
-                "title": "Advanced Analytics",
-                "description": "Deep insights into every interaction."
+                "icon": "4️⃣",
+                "title": "Seamless Handoff",
+                "description": "Effortlessly pass qualified leads to your sales team."
             }
         ]
+    },
+    "whyChoose": {
+        "title": "Why Choose Fidelio?",
+        "features": [
+            {
+                "icon": "✅",
+                "title": "AI-driven Lead Qualification",
+                "description": "Focus only on high-intent buyers with smart AI."
+            },
+            {
+                "icon": "✅",
+                "title": "WhatsApp Automation",
+                "description": "Engage prospects instantly, 24/7."
+            },
+            {
+                "icon": "✅",
+                "title": "Sales Funnel Optimization",
+                "description": "Smoothly move leads through your sales pipeline."
+            },
+            {
+                "icon": "✅",
+                "title": "Seamless CRM Integration",
+                "description": "Connect with your existing tools effortlessly."
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Pricing Plans",
+        "description": "Explore our competitive pricing. More details coming soon.",
+        "comingSoon": "Coming Soon"
+      },
+    "cta": {
+        "title": "Get Started Today",
+        "getStarted": "Get Started Today",
+        "talkToExpert": "Talk to an Expert"
+    },
+    "industries": {
+        "title": "Industries We Serve",
+        "list": [
+            {
+                "icon": "📌",
+                "text": "Car Dealerships – Automate lead capture & qualification."
+            },
+            {
+                "icon": "📌",
+                "text": "Real Estate – Convert inquiries into buyers automatically."
+            },
+            {
+                "icon": "📌",
+                "text": "E-commerce & Retail – AI-powered WhatsApp sales assistant."
+            },
+            {
+                "icon": "📌",
+                "text": "Finance & Insurance – Automate lead nurturing & policy sales."
+            }
+        ]
+    },
+    "footer": {
+        "brand":"FIDELIO AI",
+        "privacy": "Privacy",
+        "terms": "Terms",
+        "about": "About",
+        "blog": "Blog",
+        "contact": "Contact",
+        "rights": "All rights reserved."
     },
     "process": {
         "title": "Process",
@@ -61,112 +141,38 @@
             }
         ]
     },
-    "pricing": {
-        "title": "Pricing",
-        "description": "Transparent. Flexible. No hidden fees.",
-        "plans": {
-            "basic": {
-                "name": "Basic",
-                "price": "$99",
-                "period": "/mo",
-                "description": "For small teams",
-                "features": [
-                    "500 AI call minutes",
-                    "3 voice profiles",
-                    "Basic analytics",
-                    "Email support"
-                ],
-                "cta": "Start"
-            },
-            "pro": {
-                "name": "Pro",
-                "price": "$299",
-                "period": "/mo",
-                "description": "For growing businesses",
-                "features": [
-                    "2,000 AI call minutes",
-                    "10 voice profiles",
-                    "Advanced analytics",
-                    "Priority support",
-                    "All integrations"
-                ],
-                "cta": "Start",
-                "highlighted": true
-            },
-            "enterprise": {
-                "name": "Enterprise",
-                "price": "Custom",
-                "period": "",
-                "description": "For large operations",
-                "features": [
-                    "Unlimited minutes",
-                    "Unlimited profiles",
-                    "Real-time dashboard",
-                    "Dedicated manager",
-                    "Custom development",
-                    "SLA guarantees"
-                ],
-                "cta": "Contact"
-            }
-        }
-    },
-    "cta": {
-        "title": "Experience the Future of AI Calling",
-        "subTitle": "Start your free trial today. No credit card required.",
-        "button": "Get Started"
-    },
-    "footer": {
-        "privacy": "Privacy",
-        "terms": "Terms",
-        "about": "About",
-        "blog": "Blog",
-        "contact": "Contact",
-        "rights": "© 2025 AI Nexus. All rights reserved."
-    },
-    "signup": {
-        "title": "Create your account",
-        "subtitle": "Start your 14-day free trial, no credit card required",
-        "googleButton": "Sign up with Google",
-        "orContinueWith": "or continue with",
-        "fullName": "Full Name",
-        "namePlaceholder": "Enter your name",
-        "emailAddress": "Email Address",
-        "emailPlaceholder": "you@example.com",
-        "password": "Password",
-        "passwordPlaceholder": "Create a password",
-        "passwordNote": "Must be at least 8 characters",
-        "createAccountButton": "Create Account",
-        "agreeText": "By signing up, you agree to our",
-        "terms": "Terms of Service",
-        "andText": "and",
-        "privacyPolicy": "Privacy Policy",
-        "alreadyAccount": "Already have an account?",
-        "login": "Log in",
-        "backToHome": "Back to home"
-    },
     "login": {
-        "title": "Welcome back",
-        "subtitle": "Log in to access your account",
-        "googleButton": "Log in with Google",
-        "orContinueWith": "or continue with",
-        "emailAddress": "Email Address",
+        "brand": "FIDELIO",
+        "welcomeBack": "Welcome Back",
+        "accessAccount": "Log in to access your account",
+        "email": "Email Address",
         "emailPlaceholder": "you@example.com",
         "password": "Password",
         "passwordPlaceholder": "Enter your password",
-        "forgotPassword": "Forgot password?",
-        "rememberMe": "Remember me",
-        "loginButton": "Log In",
+        "logIn": "Log In",
+        "loggingIn": "Logging In...",
         "noAccount": "Don't have an account?",
-        "signup": "Sign up",
-        "backToHome": "Back to home"
+        "createAccount": "Create one",
+        "backToHome": "Back to home",
+        "imageAlt": "Fidelio AI Banner",
+        "imageTitle": "Welcome Back to Fidelio AI",
+        "imageSubtitle": "Empower your team with AI-powered insights.",
+        "errors": {
+            "emailRequired": "Email is required",
+            "invalidEmail": "Invalid email address",
+            "passwordRequired": "Password is required",
+            "generic": "Failed to log in. Please try again."
+        },
+        "hidePassword": "Hide password",
+        "showPassword": "Show password"
     },
     "sidebar": {
         "dashboard": "Dashboard Home",
         "clients": "Clients",
         "leads": "Leads",
         "language": "Language"
-      },
-      "dashboard": {
+    },
+    "dashboard": {
         "title": "Dashboard",
         "adminUser": "Admin User",
         "myAccount": "My Account",
@@ -210,5 +216,55 @@
         "newLeadTime": "2 hours ago",
         "emailSentTo": "Email sent to",
         "emailSentTime": "3 hours ago"
-      }
+    },
+    "signup": {
+        "brand": "FIDELIO",
+        "joinTitle": "Join Fidelio AI",
+        "joinSubtitle": "Experience AI-powered intelligence that works for you",
+        "navigation": {
+            "howItWorks": "How It Works",
+            "whyChoose": "Why Choose",
+            "pricing": "Pricing",
+            "industries": "Industries",
+            "login": "Log In",
+            "getStarted": "Get Started"
+        },
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "Enter your name",
+        "email": "Email Address",
+        "emailPlaceholder": "you@example.com",
+        "organization": "Organization",
+        "organizationPlaceholder": "Company or team name",
+        "password": "Password",
+        "passwordTips": "Password Tips",
+        "passwordPlaceholder": "Create a secure password",
+        "passwordCriteria": "Must be at least 8 characters",
+        "termsAgreement": "I agree to the",
+        "terms": "Terms",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy",
+        "createAccount": "Create Account",
+        "creatingAccount": "Creating Account...",
+        "accountCreated": "Account Created!",
+        "verifyEmail": "Check your email to verify your account.",
+        "continueToLogin": "Continue to Login",
+        "alreadyHaveAccount": "Already have an account?",
+        "loginNow": "Log In",
+        "backToHome": "Back to Home",
+        "errors": {
+            "nameRequired": "Name is required",
+            "emailRequired": "Email is required",
+            "invalidEmail": "Invalid email address",
+            "organizationRequired": "Organization name is required",
+            "passwordRequired": "Password is required",
+            "passwordMinLength": "Password must be at least 8 characters",
+            "terms": "You must agree to the terms",
+            "generic": "Failed to create account. Please try again."
+        },
+        "hidePassword": "Hide password",
+        "showPassword": "Show password",
+        "imageAlt": "Fidelio AI Banner",
+        "imageTitle": "Welcome to Fidelio AI",
+        "imageSubtitle": "Empower your team with AI-powered insights"
+    }
 }

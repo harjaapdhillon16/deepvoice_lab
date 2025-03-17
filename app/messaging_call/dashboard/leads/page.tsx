@@ -546,7 +546,7 @@ export default function LeadsManagement() {
                               <Eye className="h-4 w-4" />
                             </Button>
                           </SheetTrigger>
-                          <SheetContent className="w-full sm:max-w-md bg-gray-900 text-white">
+                          <SheetContent className="w-full border-0 sm:max-w-md bg-gray-900 text-white">
                             <SheetHeader>
                               <SheetTitle className="text-white text-xl">Lead Details</SheetTitle>
                               <SheetDescription className="text-gray-400">
@@ -626,7 +626,7 @@ export default function LeadsManagement() {
                                       </DropdownMenuContent>
                                     </DropdownMenu>
                                   </div>
-                                  <ScrollArea className="h-[280px] pr-4">
+                                  <ScrollArea className="h-[300px] pr-4">
                                     <div className="space-y-3">
                                       {selectedLead.messageHistory.map((message) => (
                                         <div key={message.id} className={`bg-gray-800 p-3 rounded-lg border ${

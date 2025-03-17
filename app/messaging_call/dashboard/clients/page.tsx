@@ -432,7 +432,7 @@ export default function ClientsManagement() {
                               <Eye className="h-4 w-4" />
                             </Button>
                           </SheetTrigger>
-                          <SheetContent className="w-full sm:max-w-md bg-gray-900 text-white">
+                          <SheetContent className="w-full sm:max-w-md bg-gray-900 border-0 text-white">
                             <SheetHeader>
                               <SheetTitle className="text-white text-xl">Client Details</SheetTitle>
                               <SheetDescription className="text-gray-400">
@@ -478,41 +478,16 @@ export default function ClientsManagement() {
                                   </div>
                                 </div>
                                 <div className="mb-6">
-                                  <h3 className="text-sm font-medium mb-2">Notes</h3>
+                                  <h3 className="text-xl font-medium mb-2">Notes</h3>
                                   <div className="bg-gray-800 p-3 rounded-md text-sm text-gray-300 border border-gray-700">
                                     {selectedClient.notes}
                                   </div>
                                 </div>
                                 <div>
                                   <div className="flex items-center justify-between mb-3">
-                                    <h3 className="text-sm font-medium">Message History</h3>
-                                    <DropdownMenu>
-                                      <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost" size="sm" className="h-8 text-xs text-gray-400 hover:text-white">
-                                          <Filter className="h-3 w-3 mr-1" />
-                                          Filter
-                                        </Button>
-                                      </DropdownMenuTrigger>
-                                      <DropdownMenuContent className="bg-gray-900 border-gray-800">
-                                        <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-gray-800">
-                                          All Messages
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-gray-800">
-                                          Chatbot
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-gray-800">
-                                          Email
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-gray-800">
-                                          Calls
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-gray-800">
-                                          Notes
-                                        </DropdownMenuItem>
-                                      </DropdownMenuContent>
-                                    </DropdownMenu>
+                                    <h3 className="text-xl font-medium">Message History</h3>
                                   </div>
-                                  <ScrollArea className="h-[280px] pr-4">
+                                  <ScrollArea className="pr-4">
                                     <div className="space-y-3">
                                       {selectedClient.messageHistory.map((message) => (
                                         <div 

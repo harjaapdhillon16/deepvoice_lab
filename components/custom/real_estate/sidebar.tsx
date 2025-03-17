@@ -18,6 +18,7 @@ import {
     ChevronDown,
     Sparkles
 } from 'lucide-react';
+import { supabase } from '@/lib/utils';
 
 const Sidebar = ({ activePage = 'dashboard' }) => {
     const [collapsed, setCollapsed] = useState(false);
@@ -196,7 +197,7 @@ const Sidebar = ({ activePage = 'dashboard' }) => {
                             </button>
 
                             {/* Desktop collapse button */}
-                           
+
                         </div>
                     </div>
 
@@ -290,8 +291,10 @@ const Sidebar = ({ activePage = 'dashboard' }) => {
                                         </li>
                                     ))}
                                     <li>
-                                        <a
-                                            href="/logout"
+                                        <button
+                                            onClick={async () => {
+                                                await supabase.auth.signOut()
+                                            }}
                                             className={`
                                                 group flex gap-x-3 rounded-lg p-2 text-sm leading-6 font-medium
                                                 transition-all duration-150 ease-in-out
@@ -303,7 +306,7 @@ const Sidebar = ({ activePage = 'dashboard' }) => {
                                                 <LogOut size={20} />
                                             </div>
                                             {!collapsed && <span>Logout</span>}
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </li>
